@@ -29,7 +29,7 @@ setTimeout(() => {
       <Router history={history}>
         <div>
           <div className='page-background'/>
-          <h2 className='page-description'>ORU</h2>
+          <h2 className='page-description'></h2>
           <Header/>
           <Switch>
             <Route path="/" exact={true} component={() => <AsyncComponent
