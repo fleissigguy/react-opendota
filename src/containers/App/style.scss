@@ -7,3 +7,41 @@
   top: 60%;
   transform: translateY(-40%);
 }
+
+.search-user-form {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  > i {
+    position: absolute;
+    top: 5px;
+  }
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  margin: 0 14px 0 47px;
+  flex: 1;
+  border-bottom: 1px solid transparent;
+  font-size: 24px;
+  font-weight: 100;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: rgb(92, 107, 136);
+  &:focus{
+    border-bottom: 1px solid rgb(92, 107, 136);
+  }
+}
+.search-users-button {
+  padding: 5px 10px;
+  font-size: 24px;
+  background: transparent;
+  color: rgb(92, 107, 136);
+  border: 1px solid;
+  border-radius: 2px;
+  &:active{
+    background: rgb(92, 107, 136);
+    color: rgb(245, 245, 245);
+    border-color: rgb(92, 107, 136);
+  }
+}

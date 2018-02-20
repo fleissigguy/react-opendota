@@ -72,6 +72,10 @@ div#root {
 //TODO
 //rgb(75, 89, 132)
 
+input,button{
+  outline:none;
+}
+
 .page-background {
   background-image: url(assets/background.jpg);
   width: 100%;

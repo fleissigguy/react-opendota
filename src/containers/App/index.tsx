@@ -1,16 +1,19 @@
 import * as React from 'react';
-import * as TodoActions from '../../actions/todos';
+import * as SearchActions from '../../actions/search';
 import './style.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { RootState } from '../../reducers';
 import PageInformer from "../../utils/PageInformer";
+import { autobind } from 'core-decorators';
+import PropTypes from 'prop-types';
+import SteamUser from '../../components/SteamUser';
+
 
 export namespace App {
   export interface Props extends RouteComponentProps<void> {
-    todos: TodoItemData[];
-    actions: typeof TodoActions;
+    search: SearchStoreState;
+    actions: typeof SearchActions;
   }
 
   export interface State {
@@ -20,32 +23,56 @@ export namespace App {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends React.Component<App.Props, App.State> {
+  searchInput: HTMLInputElement;
+  static contextTypes = {
+    router: PropTypes.object
+  };
 
-  componentWillMount(){
+  constructor(props, context) {
+    super(props, context);
+  }
 
+  componentWillMount() {
     PageInformer.setPageInfo('Главная', '');
   }
 
+  componentWillReceiveProps(newProps) {
+    // if(newProps.search.loading){
+    //   this.context.router.
+    // }
+  }
+
+  @autobind()
+  searchUsers(e) {
+    e.preventDefault();
+    this.props.actions.searchUsers(this.searchInput.value)
+  }
+
   render() {
-    const { todos, actions, children } = this.props;
+    const {search} = this.props;
+
     return (
       <div className='page app'>
-        <form>
-          <i className="fab fa-steam"></i>
+
+        <form noValidate={true} className={`search-user-form ${search.loading && 'is-loading'} ${search.results.length && 'results-is-not-empty'}`}>
+          <i className="fab fa-steam"/>
+          <input type="text" className="search-input" name='search-input' ref={ref => this.searchInput = ref}/>
+          <button className="search-users-button" type='submit' onClick={this.searchUsers}>поиск</button>
         </form>
+        {search.results.map((result) => <SteamUser data={result}/>)}
       </div>
     );
   }
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state) {
   return {
-    todos: state.todos
+    search: state.search
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(TodoActions as any, dispatch)
+    actions: bindActionCreators(SearchActions as any, dispatch)
   };
 }
