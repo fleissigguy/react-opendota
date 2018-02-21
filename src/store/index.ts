@@ -1,16 +1,21 @@
-import { createStore, applyMiddleware, Store } from 'redux';
+import { createStore, applyMiddleware, Store, compose } from 'redux';
+import thunk from 'redux-thunk';
 import { composeWithDevTools } from "redux-devtools-extension";
 import { logger } from '../middleware';
-import rootReducer, { RootState } from '../reducers';
+import reducers  from '../reducers';
 
-export function configureStore(initialState?: RootState) {
-  let middleware = applyMiddleware(logger);
+export function configureStore(initialState?) {
+  let middlewares = compose(applyMiddleware(thunk));
+
 
   if (process.env.NODE_ENV === 'development') {
-    middleware = composeWithDevTools(middleware);
+    middlewares = composeWithDevTools(middlewares);
   }
 
-  const store = createStore(rootReducer, initialState, middleware) as Store<RootState>;
+  const store = createStore(
+    reducers,
+    middlewares
+  );
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {

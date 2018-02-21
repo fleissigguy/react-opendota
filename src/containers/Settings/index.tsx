@@ -4,7 +4,6 @@ import './style.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { RootState } from '../../reducers';
 import { Header, MainSection } from '../../components';
 import PageInformer from "../../utils/PageInformer";
 
@@ -42,7 +41,7 @@ export class Settings extends React.Component<Settings.Props, Settings.State> {
   }
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state) {
   return {
     todos: state.todos
   };
