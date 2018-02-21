@@ -38,7 +38,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: isProduction
-          ? 'awesome-typescript-loader?module=es6'
+          ? 'awesome-typescript-loader?module=esnext'
           : [
             'react-hot-loader/webpack',
             'awesome-typescript-loader'
