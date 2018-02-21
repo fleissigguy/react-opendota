@@ -41,6 +41,7 @@ export class Header extends React.Component<Header.Props> {
         <h1 className='title'>{'<OPENDOTA/>'}</h1>
         <div className='routes' onClick={this.showHideNavigation}>
           <NavLink className='router-link' exact={true} activeClassName='router-link--active' to="/">Главная</NavLink>
+          <NavLink className='router-link' activeClassName='router-link--active' to="/search">Поиск</NavLink>
           <NavLink className='router-link' activeClassName='router-link--active' to="/game">Статистика</NavLink>
           <NavLink className='router-link' activeClassName='router-link--active' to="/settings">Настройки</NavLink>
         </div>

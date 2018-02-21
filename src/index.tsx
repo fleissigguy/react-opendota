@@ -8,13 +8,13 @@ import {AsyncComponent} from './utils/AsyncComponentLoader';
 import {Header} from './components/Header/index';
 import './style.scss';
 import RootEventListener from './utils/RootEventListener';
-
 const store = configureStore();
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 const app = () => import(/* webpackMode: "lazy", webpackChunkName: "app-root" */ './containers/App');
 const playground = () => import(/* webpackMode: "lazy", webpackChunkName: "app-playground" */ './containers/Playground');
 const settings = () => import(/* webpackMode: "lazy", webpackChunkName: "app-settings" */ './containers/Settings');
+const search = () => import(/* webpackMode: "lazy", webpackChunkName: "app-search" */ './containers/Search');
 
 const root = ((root: any) => {
   root.addEventListener('scroll', RootEventListener.OnScroll);
@@ -39,6 +39,9 @@ setTimeout(() => {
             </Route>
             <Route path="/game" component={() => <AsyncComponent
               moduleProvider={playground}/>}>
+            </Route>
+            <Route path="/search" component={() => <AsyncComponent
+              moduleProvider={search}/>}>
             </Route>
           </Switch>
         </div>

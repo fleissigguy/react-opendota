@@ -16,7 +16,7 @@ $second-color: rgb(245, 245, 245);
   }
   .root-scrolled & {
     &:not(.nav-showed) {
-      height: 132px;
+      height: 142px;
       background-color: $second-color;
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.32);
     }
@@ -51,9 +51,10 @@ $second-color: rgb(245, 245, 245);
 
   .header:not(.nav-showed) & {
     .root-scrolled & {
-      margin-top: 28px;
+      margin-top: 32px;
       background: rgba(0, 0, 0, 0);
       transform: translateX(94px);
+      font-size: 64px;
     }
   }
 }
@@ -74,7 +75,7 @@ $second-color: rgb(245, 245, 245);
     background: $second-color;
   }
   .root-scrolled & {
-    top: 32px;
+    top: 40px;
   }
   &:hover {
     transform: scale(1.1);
@@ -139,7 +140,7 @@ $second-color: rgb(245, 245, 245);
   }
 
   .root-scrolled & {
-    top: 32px;
+    top: 40px;
   }
 }
 
@@ -169,15 +170,15 @@ $second-color: rgb(245, 245, 245);
   .header:not(.nav-showed) & {
     .root-scrolled & {
       left: auto;
-      margin-top: 28px;
-      margin-left: 448px;
+      margin-left: calc(4% + 450px);
+      margin-top: 36px;
     }
   }
 }
 
 .router-link {
   text-decoration: none;
-  font-size: 8vw;
+  font-size: 11vh;
   color: $second-color;
   padding: 0 0.1em;
   text-align: right;
@@ -199,7 +200,7 @@ $second-color: rgb(245, 245, 245);
   .header:not(.nav-showed) & {
     .root-scrolled & {
       &--active {
-        font-size: 4.2vw;
+        font-size: 60px;
         color: rgb(119, 135, 165);
       }
     }

@@ -9,6 +9,7 @@ import * as SearchActions from '../constants/search';
 const searchUsersRequest = createAction(SearchActions.SEARCH_REQUEST);
 const searchUsersSuccess = createAction<SearchStoreState>(SearchActions.SEARCH_SUCCESS);
 const searchUsersFailure = createAction<SearchStoreState>(SearchActions.SEARCH_FAILURE);
+const setDefaultSearchState = createAction(SearchActions.SET_DEFAULT_STATE);
 
 const action = (type, data: SearchStoreState = {}) =>
   ({
@@ -17,7 +18,7 @@ const action = (type, data: SearchStoreState = {}) =>
   });
 
 
-export const searchUsers = query => async (dispatch) => {
+export const searchUsers = query => async dispatch => {
   dispatch(searchUsersRequest());
   try {
     const response = await axios.get<Array<SearchResult>>('https://api.opendota.com/api/search?q=' + query);
@@ -28,7 +29,10 @@ export const searchUsers = query => async (dispatch) => {
     console.error(e);
     dispatch(searchUsersFailure({error: e}))
   }
+};
 
+export const clearUsers = () => dispatch =>{
+  dispatch(setDefaultSearchState());
 };
 
 

@@ -18,7 +18,7 @@ export default class SearchUser extends React.Component<SearchUser.Props>{
     return (
       <div className="search-user">
         <img src={avatarfull} alt="" className="avatar"/>
-        <label>{personaname}</label>
+        <label className="name">{personaname}</label>
       </div>
     )
   }
