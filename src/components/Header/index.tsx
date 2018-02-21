@@ -38,11 +38,12 @@ export class Header extends React.Component<Header.Props> {
           <span className='menu-button-bar'/>
         </div>
         <div className="menu-button-after"/>
-        <h1 className='title'>MOBA</h1>
+        <h1 className='title'>{'<OPENDOTA/>'}</h1>
         <div className='routes' onClick={this.showHideNavigation}>
-          <NavLink className='router-link' exact={true} activeClassName='router-link--active' to="/">home</NavLink>
-          <NavLink className='router-link' activeClassName='router-link--active' to="/game">game</NavLink>
-          <NavLink className='router-link' activeClassName='router-link--active' to="/settings">settings</NavLink>
+          <NavLink className='router-link' exact={true} activeClassName='router-link--active' to="/">Главная</NavLink>
+          <NavLink className='router-link' activeClassName='router-link--active' to="/search">Поиск</NavLink>
+          <NavLink className='router-link' activeClassName='router-link--active' to="/game">Статистика</NavLink>
+          <NavLink className='router-link' activeClassName='router-link--active' to="/settings">Настройки</NavLink>
         </div>
       </header>
     );

@@ -1,0 +1,42 @@
+.search-user {
+  font-size: 22px;
+  line-height: 1.4;
+  display: inline-block;
+  width: 160px;
+  height: 160px;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.32);
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.375s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+  &:hover {
+    transform: scale(1.8);
+    z-index: 2;
+    border-radius: 50%;
+    transition: all 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) 0s !important;
+  }
+  .avatar {
+    height: 100%;
+    border-radius: inherit;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    background-color: rgb(75, 89, 132);
+  }
+  .name {
+    padding: 0 5px;
+    position: absolute;
+    background: rgba(75, 89, 132, 0.6);
+    color: rgb(245, 245, 245);
+    font-weight: normal;
+    text-align: left;
+    transition: all 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) 0s !important;
+    pointer-events: none;
+  }
+  &:hover .name {
+    background-color: rgb(245, 245, 245);
+    color: rgb(75, 89, 132);
+    transform: translate(-9%,-72%) rotate3d(-1, 1.3, 3.5, -7deg);
+  }
+}

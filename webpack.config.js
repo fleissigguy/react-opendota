@@ -38,7 +38,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: isProduction
-          ? 'awesome-typescript-loader?module=es6'
+          ? 'awesome-typescript-loader?module=esnext'
           : [
             'react-hot-loader/webpack',
             'awesome-typescript-loader'
@@ -58,24 +58,11 @@ module.exports = {
                 importLoaders: 1,
                 localIdentName: '[local]__[hash:base64:5]'
               }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: [
-                  require('postcss-import')({ addDependencyTo: Webpack }),
-                  require('postcss-url')(),
-                  require('postcss-cssnext')(),
-                  require('postcss-reporter')(),
-                  require('postcss-browser-reporter')({ disabled: isProduction }),
-                ]
-              }
             }
           ]
         })
       },
-      // css
+      // scss
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
@@ -100,7 +87,7 @@ module.exports = {
       },
       // static assets
       { test: /\.html$/, use: 'html-loader' },
-      { test: /\.(png|jpg)$/, use: 'base64-inline-loader?limit=25000&name=[name].[ext]' }
+      { test: /\.(png|svg|jpg)$/, use: 'base64-inline-loader?limit=25000&name=[name].[ext]' }
     ],
   },
   plugins: [

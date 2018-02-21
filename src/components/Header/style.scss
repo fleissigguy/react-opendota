@@ -1,4 +1,4 @@
-$main-color: rgb(92, 107, 136);
+$main-color:rgb(75, 89, 132);
 $second-color: rgb(245, 245, 245);
 
 .header {
@@ -16,8 +16,8 @@ $second-color: rgb(245, 245, 245);
   }
   .root-scrolled & {
     &:not(.nav-showed) {
-      height: 132px;
-      background-color: rgb(245, 245, 245);
+      height: 142px;
+      background-color: $second-color;
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.32);
     }
   }
@@ -38,8 +38,8 @@ $second-color: rgb(245, 245, 245);
   transform: translateX(150px);
   transition: transform 350ms ease-in-out;
   font-size: 4.2vw;
-  color: rgb(92, 107, 136);
-  background: rgb(245, 245, 245);
+  color: $main-color;
+  background: $second-color;
   padding: 0 14px;
   .nav-showed & {
     pointer-events: all;
@@ -51,9 +51,10 @@ $second-color: rgb(245, 245, 245);
 
   .header:not(.nav-showed) & {
     .root-scrolled & {
-      margin-top: 28px;
+      margin-top: 32px;
       background: rgba(0, 0, 0, 0);
       transform: translateX(94px);
+      font-size: 64px;
     }
   }
 }
@@ -61,7 +62,7 @@ $second-color: rgb(245, 245, 245);
 .menu-button {
   width: 64px;
   height: 64px;
-  background: rgb(92, 107, 136);
+  background: $main-color;
   border-radius: 50%;
   transition: all 125ms cubic-bezier(0.22, 0.61, 0.36, 1);
   position: absolute;
@@ -74,7 +75,7 @@ $second-color: rgb(245, 245, 245);
     background: $second-color;
   }
   .root-scrolled & {
-    top: 32px;
+    top: 40px;
   }
   &:hover {
     transform: scale(1.1);
@@ -124,7 +125,7 @@ $second-color: rgb(245, 245, 245);
   transform: scale(0);
   width: 64px;
   height: 64px;
-  background-color: rgb(92, 107, 136);
+  background-color: $main-color;
   position: absolute;
   right: 128px;
   top: 64px;
@@ -139,7 +140,7 @@ $second-color: rgb(245, 245, 245);
   }
 
   .root-scrolled & {
-    top: 32px;
+    top: 40px;
   }
 }
 
@@ -169,16 +170,16 @@ $second-color: rgb(245, 245, 245);
   .header:not(.nav-showed) & {
     .root-scrolled & {
       left: auto;
-      margin-top: 28px;
-      margin-left: 281px;
+      margin-left: calc(4% + 450px);
+      margin-top: 36px;
     }
   }
 }
 
 .router-link {
   text-decoration: none;
-  font-size: 11vw;
-  color: rgb(245, 245, 245);
+  font-size: 11vh;
+  color: $second-color;
   padding: 0 0.1em;
   text-align: right;
   &--active {
@@ -199,7 +200,7 @@ $second-color: rgb(245, 245, 245);
   .header:not(.nav-showed) & {
     .root-scrolled & {
       &--active {
-        font-size: 4.2vw;
+        font-size: 60px;
         color: rgb(119, 135, 165);
       }
     }
