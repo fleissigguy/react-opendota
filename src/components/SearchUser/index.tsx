@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 
-export namespace SteamUser {
+export namespace SearchUser {
   export interface Props {
     data:SearchResult
   }
 }
 
 
-export default class SteamUser extends React.Component<SteamUser.Props>{
+export default class SearchUser extends React.Component<SearchUser.Props>{
 
 
 

@@ -5,14 +5,17 @@ import { logger } from '../middleware';
 import reducers  from '../reducers';
 
 export function configureStore(initialState?) {
-  let middlewares = compose(applyMiddleware(thunk,logger));
+  let middlewares = compose(applyMiddleware(thunk));
 
 
   if (process.env.NODE_ENV === 'development') {
     middlewares = composeWithDevTools(middlewares);
   }
 
-  const store = middlewares(createStore)(reducers);
+  const store = createStore(
+    reducers,
+    middlewares
+  );
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {

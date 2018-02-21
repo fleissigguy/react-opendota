@@ -3,27 +3,33 @@ import * as SearchActions from '../constants/search';
 
 const initialState: SearchStoreState = {
   completed: false,
+  error:null,
   loading: false,
   results: []
 };
 
 
-export default handleActions<SearchStoreState | any>({
-  [SearchActions.SEARCH]: (state, action) => {
-    const newState ={
+export default handleActions<SearchStoreState>({
+  [SearchActions.SEARCH_REQUEST]: (state) => {
+    return {
       loading: true,
-      completed: false,
-      ...state,
-      ...action.payload,
+      ...state
     };
-    debugger;
-    return newState;
   },
-  [SearchActions.SEARCH_REQUEST]: (state, action) => {
-      return {
-        loading:true,
-        completed:false,
-        ...action.payload
-      }
+  [SearchActions.SEARCH_SUCCESS]: (state, action) => {
+    return {
+      loading:false,
+      completed:true,
+      ...state,
+      ...action.payload
+    }
+  },
+  [SearchActions.SEARCH_FAILURE]: (state, action) => {
+    return {
+      loading:false,
+      completed:true,
+      ...state,
+      ...action.payload
+    }
   }
 }, initialState);

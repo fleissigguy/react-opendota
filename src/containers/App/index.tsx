@@ -7,7 +7,7 @@ import { RouteComponentProps } from 'react-router';
 import PageInformer from "../../utils/PageInformer";
 import { autobind } from 'core-decorators';
 import PropTypes from 'prop-types';
-import SteamUser from '../../components/SteamUser';
+import SearchUser from '../../components/SearchUser';
 
 
 export namespace App {
@@ -59,7 +59,7 @@ export class App extends React.Component<App.Props, App.State> {
           <input type="text" className="search-input" name='search-input' ref={ref => this.searchInput = ref}/>
           <button className="search-users-button" type='submit' onClick={this.searchUsers}>поиск</button>
         </form>
-        {search.results.map((result) => <SteamUser data={result}/>)}
+        {search.results.map((result) => <SearchUser data={result}/>)}
       </div>
     );
   }

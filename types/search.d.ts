@@ -1,7 +1,8 @@
 declare interface SearchStoreState{
   completed?:boolean,
   loading?:boolean,
-  results?:Array<SearchResult>
+  results?:Array<SearchResult>,
+  error?:string|any
 }
 
 

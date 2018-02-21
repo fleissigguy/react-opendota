@@ -6,48 +6,65 @@ import * as SearchActions from '../constants/search';
 //   (query:string)=>{
 //     axios.get('https://api.opendota.com/api/search')
 //   });
-const searchUsersRequest = createAction<SearchStoreState>(SearchActions.SEARCH);
+const searchUsersRequest = createAction(SearchActions.SEARCH_REQUEST);
+const searchUsersSuccess = createAction<SearchStoreState>(SearchActions.SEARCH_SUCCESS);
+const searchUsersFailure = createAction<SearchStoreState>(SearchActions.SEARCH_FAILURE);
 
-const action = (type, data:SearchStoreState = {}) =>
+const action = (type, data: SearchStoreState = {}) =>
   ({
     type: type,
     payload: {...data}
   });
 
 
-export const searchUsers = (query) => {
-  console.log('query',query);
-  searchUsersRequest({loading:true});
-    // const response = axios.get<Array<SearchResult>>('https://api.opendota.com/api/search?q=' + query);
+export const searchUsers = query => async (dispatch) => {
+  dispatch(searchUsersRequest());
+  try {
+    const response = await axios.get<Array<SearchResult>>('https://api.opendota.com/api/search?q=' + query);
+    dispatch(searchUsersSuccess({
+      results: [...response.data]
+    }));
+  } catch (e) {
+    console.error(e);
+    dispatch(searchUsersFailure({error: e}))
+  }
 
-    // if (response.status) {
-    //
-    //   return dispatch(action(SearchActions.SEARCH,{
-    //     loading:false,
-    //     completed:true,
-    //     results:response.data
-    //   }))
-    // }
+};
 
-  /*
 
-  .then(response=>{
-    searchUsersRequest({
-      loading: false,
-      completed: true,
-      results: response.data
-    });
-  }).catch(()=>{
-    return searchUsersRequest({
-      loading: false,
-      completed: true,
-      results: []
-    });
+// export const searchUsers = (query) => {
+//   console.log('query',query);
+//   searchUsersRequest({loading:true});
+// const response = axios.get<Array<SearchResult>>('https://api.opendota.com/api/search?q=' + query);
+
+// if (response.status) {
+//
+//   return dispatch(action(SearchActions.SEARCH,{
+//     loading:false,
+//     completed:true,
+//     results:response.data
+//   }))
+// }
+
+/*
+
+.then(response=>{
+  searchUsersRequest({
+    loading: false,
+    completed: true,
+    results: response.data
   });
+}).catch(()=>{
+  return searchUsersRequest({
+    loading: false,
+    completed: true,
+    results: []
+  });
+});
 
-  return {
-    type:SearchActions.SEARCH
-  };
+return {
+  type:SearchActions.SEARCH
+};
 }
-   */
-}
+ */
+// }
