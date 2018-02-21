@@ -9,6 +9,7 @@ declare interface SearchStoreState{
 declare interface SearchResult{
   account_id:number,
   avatarfull:string,
-  personname:string,
+  personaname:string,
+  last_match_time:string,
   similarity:number
 }

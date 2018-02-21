@@ -8,6 +8,15 @@
   transform: translateY(-40%);
 }
 
+.search-results{
+  margin-top: 15px;
+}
+.search-user{
+  .app &{
+    height: 48px;
+  }
+}
+
 .search-user-form {
   position: relative;
   display: flex;

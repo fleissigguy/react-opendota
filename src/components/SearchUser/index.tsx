@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import './style.scss';
 
 export namespace SearchUser {
   export interface Props {
@@ -13,12 +13,12 @@ export default class SearchUser extends React.Component<SearchUser.Props>{
 
 
   render(){
-    const {avatarfull,personname} = this.props.data;
+    const {avatarfull,personaname} = this.props.data;
 
     return (
-      <div className="steam-user">
-        <label>{personname}</label>
+      <div className="search-user">
         <img src={avatarfull} alt="" className="avatar"/>
+        <label>{personaname}</label>
       </div>
     )
   }

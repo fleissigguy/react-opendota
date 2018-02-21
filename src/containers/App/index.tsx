@@ -59,7 +59,7 @@ export class App extends React.Component<App.Props, App.State> {
           <input type="text" className="search-input" name='search-input' ref={ref => this.searchInput = ref}/>
           <button className="search-users-button" type='submit' onClick={this.searchUsers}>поиск</button>
         </form>
-        {search.results.map((result) => <SearchUser data={result}/>)}
+        <div className="search-results">{search.results.map((result, key) => <SearchUser key={key} data={result}/>)}</div>
       </div>
     );
   }
