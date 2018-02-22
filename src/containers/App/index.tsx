@@ -43,7 +43,9 @@ export class App extends React.Component<App.Props, App.State> {
   @autobind()
   searchUsers(e) {
     e.preventDefault();
-    history.push('/search?query='+this.searchInput.value);
+    if(this.searchInput.value){
+      history.push('/search?query='+this.searchInput.value);
+    }
   }
 
   render() {

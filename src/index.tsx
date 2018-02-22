@@ -7,6 +7,7 @@ import {configureStore} from './store';
 import {AsyncComponent} from './utils/AsyncComponentLoader';
 import {Header} from './components/Header/index';
 import './style.scss';
+require('moment/locale/ru');
 import RootEventListener from './utils/RootEventListener';
 const store = configureStore();
 export const history = createBrowserHistory();

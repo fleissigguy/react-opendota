@@ -50,6 +50,10 @@ export class Search extends React.Component<Search.Props, Search.State> {
     }
   }
 
+  componentWillUnmount(){
+    this.props.actions.clearUsers();
+  }
+
   componentWillReceiveProps(newProps) {
     // if(newProps.search.loading){
     //   this.context.router.
