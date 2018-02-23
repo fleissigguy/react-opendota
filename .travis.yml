@@ -5,4 +5,4 @@ cache:
   yarn: true
 before_script:
   - npm i
-script: "yarn publish"
+script: npm run publish
