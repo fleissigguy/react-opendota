@@ -7,6 +7,7 @@ const isProduction = process.argv.indexOf('-p') >= 0;
 const outPath = Path.join(__dirname, './dist');
 const sourcePath = Path.join(__dirname, './src');
 
+const baseUrl =  isProduction ? 'https://js2me.github.io/opendota-webclient/' : '/';
 module.exports = {
   context: sourcePath,
   entry: {
@@ -21,7 +22,7 @@ module.exports = {
   },
   output: {
     path: outPath,
-    publicPath: '/',
+    publicPath: baseUrl,
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.chunk.js',
   },
@@ -42,7 +43,8 @@ module.exports = {
           : [
             'react-hot-loader/webpack',
             'awesome-typescript-loader'
-          ]
+          ],
+        exclude:/\node_modules/
       },
       // css
       {
@@ -86,13 +88,14 @@ module.exports = {
         })
       },
       // static assets
-      { test: /\.html$/, use: 'html-loader' },
-      { test: /\.(png|svg|jpg)$/, use: 'base64-inline-loader?limit=25000&name=[name].[ext]' }
+      {test: /\.html$/, use: 'html-loader'},
+      {test: /\.(png|svg|jpg)$/, use: 'base64-inline-loader?limit=25000&name=[name].[ext]'}
     ],
   },
   plugins: [
     new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': isProduction === true ? JSON.stringify('production') : JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
+      'process.env.PUBLIC_URL': JSON.stringify(isProduction ? 'opendota-webclient/' : '')
     }),
     new Webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',

@@ -1,3 +1,6 @@
+$main-color: rgb(30, 23, 24);
+$second-color: whitesmoke;
+
 .search-user {
   font-size: 22px;
   line-height: 1.4;
@@ -11,9 +14,9 @@
   cursor: pointer;
   transition: all 0.375s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
   &:hover {
-    transform: scale(1.8);
+    transform: scale(1.4);
     z-index: 2;
-    border-radius: 50%;
+    border-radius: 5%;
     transition: all 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) 0s !important;
   }
   .avatar {
@@ -22,21 +25,37 @@
     position: absolute;
     z-index: -1;
     width: 100%;
-    background-color: rgb(75, 89, 132);
+    background-color: $main-color;
   }
   .name {
-    padding: 0 5px;
+    padding: 0 2px;
     position: absolute;
-    background: rgba(75, 89, 132, 0.6);
-    color: rgb(245, 245, 245);
+    background: rgba($main-color, 0.6);
+    color: rgba($second-color,0.8);
     font-weight: normal;
     text-align: left;
-    transition: all 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) 0s !important;
+    line-height: 1.1;
+    font-size:24px;
+    word-break: break-all;
+    transition: all 0.375s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
     pointer-events: none;
   }
   &:hover .name {
-    background-color: rgb(245, 245, 245);
-    color: rgb(75, 89, 132);
-    transform: translate(-9%,-72%) rotate3d(-1, 1.3, 3.5, -7deg);
+    background-color: $second-color;
+    color: $main-color;
+    word-break: normal;
+    // transform: translate(-9%, -72%) rotate3d(-1, 1.3, 3.5, -7deg);
+    transform: translate(-10%, -81%) rotate3d(-1, 1.3, 3.5, -5deg)
   }
+  .last-match-time {
+    font-size: 16px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    background: rgba($main-color, 0.6);
+    padding: 0 5px;
+    color: rgba($second-color,0.7);
+    border-bottom-right-radius: inherit;
+}
 }

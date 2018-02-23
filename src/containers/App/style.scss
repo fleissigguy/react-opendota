@@ -8,12 +8,12 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  background: rgb(245, 245, 245);
+  background: whitesmoke;
   box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.32);
-  padding: 13px;
   border-radius: 2px;
   max-width: 720px;
   height: 67px;
+  padding: 0;
   &:after{
     content: '';
     position: absolute;
@@ -48,18 +48,22 @@
     position: relative;
     display: flex;
     justify-content: space-between;
+    padding: 13px;
+    width: 100%;
     > i {
-      position: absolute;
-      top: 5px;
+       /* position: absolute; */
+       top: 0;
+       margin: auto 0;
     }
   }
 
   .search-input {
     border: none;
     background: transparent;
-    margin: 0 14px 0 47px;
+    margin: 0 14px;
     flex: 1;
-    border-bottom: 1px solid transparent;
+    width: 100%;
+    border-bottom: 1px solid rgba(92, 107, 136, 0.34);
     font-size: 24px;
     font-weight: 100;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -72,10 +76,11 @@
     padding: 5px 10px;
     font-size: 24px;
     background: transparent;
-    color: rgb(92, 107, 136);
+    color: #5c6b88;
     border: 1px solid;
     border-radius: 2px;
     cursor: pointer;
+    flex: .2;
     &:active{
       background: rgb(92, 107, 136);
       color: rgb(245, 245, 245);

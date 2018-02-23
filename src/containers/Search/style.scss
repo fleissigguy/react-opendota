@@ -1,3 +1,7 @@
+$search-container-color: rgb(92, 107, 136);
+$main-color: rgb(34, 26, 24);
+$second-color: whitesmoke;
+
 .page.search{
   padding: 0;
   width: 100%;
@@ -5,10 +9,33 @@
   margin-left: auto;
   margin-right: auto;
   top: 50%;
+  /* padding-top: 10%; */
   transform: translateY(0);
-  background: rgba(0, 0, 0, 0);
   box-shadow: none;
-  margin-bottom: 3.5%;
+  margin-bottom: 0;
+  padding-bottom: 6%;
+  background: rgba($main-color, 0.71);
+  min-height: 50%;
+  &:before{
+    content: '';
+    width: 100%;
+    height: 256px;
+    position: absolute;
+    top: -255.5px;
+    left: 0;
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 51%, 65% 86%, 38% 59%, 22% 86%, 0% 27%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 51%, 65% 86%, 38% 59%, 22% 86%, 0% 27%);
+    background: rgba($main-color, 0.71);
+    transition: all 0.375s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+  }
+  .root-scrolled &{
+    &:before{
+      height: 40vh;
+      top: calc(-40vh + 0.5px);
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+  }
 
 
   .search-results {
@@ -18,7 +45,7 @@
     .not-found{
       text-align: center;
       span{
-        background:rgb(75, 89, 132);
+        background: darken(rgba($main-color, 0.8),5%);
         color:whitesmoke;
         padding: 0 10px;
       }
@@ -32,7 +59,7 @@
     display: flex;
     justify-content: space-between;
     width: 45%;
-    background: rgb(245, 245, 245);
+    background: $second-color;
     box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.32);
     padding: 13px;
     border-radius: 2px;
@@ -62,7 +89,7 @@
   &.is-loading{
     .search-user-form{
       &:after{
-        background: rgb(245, 245, 245) url(../../assets/loading.svg) no-repeat center;
+        background: $second-color url(../../assets/loading.svg) no-repeat center;
         background-size: 8%;
         opacity: 1;
       }
@@ -74,27 +101,27 @@
     background: transparent;
     margin: 0 14px 0 47px;
     flex: 1;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid rgba($search-container-color, 0.34);
     font-size: 24px;
     font-weight: 100;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: rgb(92, 107, 136);
+    color: $search-container-color;
     &:focus{
-      border-bottom: 1px solid rgb(92, 107, 136);
+      border-bottom: 1px solid $search-container-color;
     }
   }
   .search-users-button {
     padding: 5px 10px;
     font-size: 24px;
     background: transparent;
-    color: rgb(92, 107, 136);
+    color: $search-container-color;
     border: 1px solid;
     border-radius: 2px;
     cursor: pointer;
     &:active{
-      background: rgb(92, 107, 136);
-      color: rgb(245, 245, 245);
-      border-color: rgb(92, 107, 136);
+      background: $search-container-color;
+      color: $second-color;
+      border-color: $search-container-color;
     }
   }
 }

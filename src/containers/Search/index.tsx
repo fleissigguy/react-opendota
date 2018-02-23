@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as SearchActions from '../../actions/search';
+import {setUser} from '../../actions/user';
 import './style.scss';
 import { bindActionCreators } from 'redux';
 import queryString from 'query-string';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import PageInformer from "../../utils/PageInformer";
-import { history } from '../../index';
 import { autobind } from 'core-decorators';
 import PropTypes from 'prop-types';
 import SearchUser from '../../components/SearchUser';
@@ -15,16 +15,15 @@ import SearchUser from '../../components/SearchUser';
 export namespace Search {
   export interface Props extends RouteComponentProps<void> {
     search: SearchStoreState;
-    actions: typeof SearchActions;
-  }
-
-  export interface State {
-    /* empty */
+    searchActions: typeof SearchActions;
+    userActions: {
+      setUser: Function
+    }
   }
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class Search extends React.Component<Search.Props, Search.State> {
+export class Search extends React.Component<Search.Props> {
   searchInput: HTMLInputElement;
   static contextTypes = {
     router: PropTypes.object
@@ -44,10 +43,14 @@ export class Search extends React.Component<Search.Props, Search.State> {
       this.searchInput.value = routeParams.query;
     }
     if (!routeParams.query) {
-      this.props.actions.clearUsers();
+      this.props.searchActions.clearUsers();
     } else if (!this.props.search.results.length) {
-      this.props.actions.searchUsers(routeParams.query);
+      this.props.searchActions.searchUsers(routeParams.query);
     }
+  }
+
+  componentWillUnmount(){
+    this.props.searchActions.clearUsers();
   }
 
   componentWillReceiveProps(newProps) {
@@ -59,8 +62,14 @@ export class Search extends React.Component<Search.Props, Search.State> {
   @autobind()
   searchUsers(e) {
     e.preventDefault();
-    history.push('/search?query=' + this.searchInput.value);
-    this.props.actions.searchUsers(this.searchInput.value)
+    this.context.router.history.push('/search?query=' + this.searchInput.value);
+    this.props.searchActions.searchUsers(this.searchInput.value)
+  }
+
+  @autobind()
+  setActiveUser(user: ShortUserInfo){
+    this.props.userActions.setUser(user);
+    this.context.router.history.push(`/user/${user.account_id}`);
   }
 
   render() {
@@ -70,14 +79,14 @@ export class Search extends React.Component<Search.Props, Search.State> {
       <div className={`page search ${search.loading && 'is-loading'}`}>
         <form noValidate={true} className={`search-user-form ${search.results.length && 'results-is-not-empty'}`}>
           <i className="fab fa-steam"/>
-          <input type="text" className="search-input" name='search-input' ref={ref => this.searchInput = ref}/>
+          <input type="text" placeholder='ник или id игрока' className="search-input" name='search-input' ref={ref => this.searchInput = ref}/>
           <button className="search-users-button" type='submit' onClick={this.searchUsers}>поиск</button>
         </form>
 
         {!search.loading &&
         <div className="search-results">{
           search.results.length &&
-          search.results.map((result, key) => <SearchUser key={key} data={result}/>) ||
+          search.results.map((result, key) => <SearchUser key={key} handleClick={this.setActiveUser} data={result}/>) ||
           (search.completed &&
             <div className="not-found">
               <span>Ничего не найдено :(</span>
@@ -97,6 +106,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(SearchActions as any, dispatch)
+    searchActions: bindActionCreators(SearchActions as any, dispatch),
+    userActions: bindActionCreators({setUser} as any, dispatch)
   };
 }
