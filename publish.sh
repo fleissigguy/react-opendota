@@ -1,11 +1,3 @@
-# remove previous publication
-rm -rf dist
-mkdir dist
-
-# generate contents...
-npm run build
-
-# going to our gh-pages folder
 cd dist
 git init
 git add .
