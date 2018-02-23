@@ -7,7 +7,7 @@ const setShortUserRequest = createAction<ShortUserInfo>(UserActions.SET_SHORT_US
 const setDefaultState = createAction<ShortUserInfo>(UserActions.CLEAR_USER);
 // const setDefaultSearchState = createAction(UserActions.SET_DEFAULT_STATE);
 
-export const getUser = (userId:number) => async dispatch => {
+export const getFullUser = (userId:number) => async dispatch => {
   dispatch(userRequest({loading: true, completed: false}));
   try {
     const response = await axios.get<UserInfo>(`https://api.opendota.com/api/players/${userId}`);

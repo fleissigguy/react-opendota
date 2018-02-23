@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as SearchActions from '../../actions/search';
-import {setUser} from '../../actions/user';
+import * as UserActions from '../../actions/user';
 import './style.scss';
 import { bindActionCreators } from 'redux';
 import queryString from 'query-string';
@@ -107,6 +107,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     searchActions: bindActionCreators(SearchActions as any, dispatch),
-    userActions: bindActionCreators({setUser} as any, dispatch)
+    userActions: bindActionCreators(UserActions as any, dispatch)
   };
 }

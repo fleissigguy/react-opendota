@@ -94,8 +94,7 @@ module.exports = {
   },
   plugins: [
     new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
-      'process.env.PUBLIC_URL': JSON.stringify(isProduction ? 'opendota-webclient/' : '')
+      'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development')
     }),
     new Webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',

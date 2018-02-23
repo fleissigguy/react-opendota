@@ -30,7 +30,7 @@ const root = ((root: any) => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter basename={process.env.PUBLIC_URL}>
+    <HashRouter>
       <div className='page-content'>
         <div className='page-background'/>
         <h2 className='page-description'/>
