@@ -9,7 +9,7 @@
     "start": "webpack-dev-server --debug --devtool cheap-module-source-map --output-pathinfo --history-api-fallback --hot --inline --progress --colors --port 3001 --open",
     "build": "webpack -p --progress --colors --optimize-minimize",
     "start:prod": "webpack-dev-server -p --progress --colors --port 3001 --open",
-    "publish": "bash ./github.publish.sh"
+    "publish": "bash ./publish.sh"
   },
   "license": "MIT",
   "devDependencies": {
