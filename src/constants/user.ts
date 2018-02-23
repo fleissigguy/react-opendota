@@ -1,0 +1,4 @@
+export const USER_REQUEST = 'USER_REQUEST';
+export const SET_DEFAULT_STATE = 'SET_DEFAULT_STATE';
+export const SET_SHORT_USER = 'SET_SHORT_USER';
+export const CLEAR_USER = 'CLEAR_USER';

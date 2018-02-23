@@ -6,9 +6,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import PageInformer from "../../utils/PageInformer";
 import { autobind } from 'core-decorators';
-import {history} from '../../index';
 import PropTypes from 'prop-types';
-import SearchUser from '../../components/SearchUser';
 
 
 export namespace App {
@@ -44,7 +42,7 @@ export class App extends React.Component<App.Props, App.State> {
   searchUsers(e) {
     e.preventDefault();
     if(this.searchInput.value){
-      history.push('/search?query='+this.searchInput.value);
+      this.context.router.history.push('/search?query='+this.searchInput.value);
     }
   }
 
@@ -55,7 +53,7 @@ export class App extends React.Component<App.Props, App.State> {
       <div className={`page app ${search.loading && 'is-loading'}`}>
         <form noValidate={true} className={`search-user-form ${search.results.length && 'results-is-not-empty'}`}>
           <i className="fab fa-steam"/>
-          <input type="text" className="search-input" name='search-input' ref={ref => this.searchInput = ref}/>
+          <input type="text" placeholder='ник или id игрока' className="search-input" name='search-input' ref={ref => this.searchInput = ref}/>
           <button className="search-users-button" type='submit' onClick={this.searchUsers}>поиск</button>
         </form>
       </div>

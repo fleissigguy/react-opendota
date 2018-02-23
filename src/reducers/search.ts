@@ -10,29 +10,14 @@ const initialState: SearchStoreState = {
 
 
 export default handleActions<SearchStoreState>({
-  [SearchActions.SEARCH_REQUEST]: (state) => {
+  [SearchActions.SEARCH_REQUEST]: (state, action) => {
     return {
       ...state,
-      loading: true
+      // error: action.payload.error || null,
+      ...action.payload
     };
   },
-  [SearchActions.SEARCH_SUCCESS]: (state, action) => {
-    return {
-      ...state,
-      loading:false,
-      completed:true,
-      ...action.payload
-    }
-  },
-  [SearchActions.SEARCH_FAILURE]: (state, action) => {
-    return {
-      ...state,
-      loading:false,
-      completed:true,
-      ...action.payload
-    }
-  },
-  [SearchActions.SET_DEFAULT_STATE]: (state, action) => {
+  [SearchActions.SET_DEFAULT_SEARCH_STATE]: () => {
     return {...initialState}
   }
 }, initialState);

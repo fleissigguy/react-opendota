@@ -5,7 +5,7 @@ import { logger } from '../middleware';
 import reducers  from '../reducers';
 
 export function configureStore(initialState?) {
-  let middlewares = compose(applyMiddleware(thunk));
+  let middlewares = compose(applyMiddleware(thunk, logger));
 
 
   if (process.env.NODE_ENV === 'development') {
