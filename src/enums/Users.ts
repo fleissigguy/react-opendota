@@ -1,4 +1,4 @@
 
-export enum Users {
-  NEW_USER
+export enum Players {
+  NEW_PLAYER
 }

@@ -1,5 +1,5 @@
 $search-container-color: rgb(92, 107, 136);
-$main-color: rgb(34, 26, 24);
+$main-color: rgb(0, 0, 0);
 $second-color: whitesmoke;
 
 .page.search{
@@ -14,24 +14,24 @@ $second-color: whitesmoke;
   box-shadow: none;
   margin-bottom: 0;
   padding-bottom: 6%;
-  background: rgba($main-color, 0.71);
+  background: rgba($main-color, 0.5);
   min-height: 50%;
   &:before{
     content: '';
     width: 100%;
     height: 256px;
     position: absolute;
-    top: -255.5px;
+    top: -256px;
     left: 0;
     -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 51%, 65% 86%, 38% 59%, 22% 86%, 0% 27%);
     clip-path: polygon(0% 100%, 100% 100%, 100% 51%, 65% 86%, 38% 59%, 22% 86%, 0% 27%);
-    background: rgba($main-color, 0.71);
+    background: rgba($main-color, 0.5);
     transition: all 0.375s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
   }
   .root-scrolled &{
     &:before{
       height: 40vh;
-      top: calc(-40vh + 0.5px);
+      top: -40vh;
       -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
@@ -54,7 +54,7 @@ $second-color: whitesmoke;
 
 
 
-  .search-user-form {
+  .search-player-form {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -87,7 +87,7 @@ $second-color: whitesmoke;
 
 
   &.is-loading{
-    .search-user-form{
+    .search-player-form{
       &:after{
         background: $second-color url(../../assets/loading.svg) no-repeat center;
         background-size: 8%;
@@ -110,7 +110,7 @@ $second-color: whitesmoke;
       border-bottom: 1px solid $search-container-color;
     }
   }
-  .search-users-button {
+  .search-players-button {
     padding: 5px 10px;
     font-size: 24px;
     background: transparent;

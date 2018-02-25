@@ -2,21 +2,21 @@ import { createAction } from 'redux-actions';
 import axios from 'axios';
 import * as SearchActions from '../constants/search';
 
-const searchUsersRequest = createAction<SearchStoreState>(SearchActions.SEARCH_REQUEST);
+const searchPlayersRequest = createAction<SearchStoreState>(SearchActions.SEARCH_REQUEST);
 const setDefaultSearchState = createAction(SearchActions.SET_DEFAULT_SEARCH_STATE);
 
-export const searchUsers = query => async dispatch => {
-  dispatch(searchUsersRequest({loading: true, completed: false}));
+export const searchPlayers = query => async dispatch => {
+  dispatch(searchPlayersRequest({loading: true, completed: false}));
   try {
-    const response = await axios.get<Array<ShortUserInfo>>(`https://api.opendota.com/api/search?q=${query}`);
-    dispatch(searchUsersRequest({
+    const response = await axios.get<Array<ShortPlayerInfo>>(`https://api.opendota.com/api/search?q=${query}`);
+    dispatch(searchPlayersRequest({
       loading: false,
       completed: true,
       results: [...response.data]
     }));
   } catch (e) {
     console.error(e);
-    dispatch(searchUsersRequest({
+    dispatch(searchPlayersRequest({
       loading: false,
       completed: true,
       results: [],
@@ -25,6 +25,6 @@ export const searchUsers = query => async dispatch => {
   }
 };
 
-export const clearUsers = () => dispatch => {
+export const clearPlayers = () => dispatch => {
   dispatch(setDefaultSearchState());
 };

@@ -39,9 +39,11 @@ export class App extends React.Component<App.Props, App.State> {
   }
 
   @autobind()
-  searchUsers(e) {
+  searchPlayers(e) {
     e.preventDefault();
-    if(this.searchInput.value){
+    if(/(\d){1,9}/.test(this.searchInput.value)){
+      this.context.router.history.push('/player/'+this.searchInput.value);
+    }else{
       this.context.router.history.push('/search?query='+this.searchInput.value);
     }
   }
@@ -51,10 +53,10 @@ export class App extends React.Component<App.Props, App.State> {
 
     return (
       <div className={`page app ${search.loading && 'is-loading'}`}>
-        <form noValidate={true} className={`search-user-form ${search.results.length && 'results-is-not-empty'}`}>
+        <form noValidate={true} className={`search-player-form ${search.results.length && 'results-is-not-empty'}`}>
           <i className="fab fa-steam"/>
           <input type="text" placeholder='ник или id игрока' className="search-input" name='search-input' ref={ref => this.searchInput = ref}/>
-          <button className="search-users-button" type='submit' onClick={this.searchUsers}>поиск</button>
+          <button className="search-players-button" type='submit' onClick={this.searchPlayers}>поиск</button>
         </form>
       </div>
     );
