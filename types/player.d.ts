@@ -1,31 +1,38 @@
-declare interface UserStoreState{
+declare interface PlayerStoreState{
   completed?:boolean,
   loading?:boolean,
-  user?:UserInfo | null,
-  shortUser?: ShortUserInfo | null,
-  error?:string|any
+  fullPlayer?:PlayerInfo | null,
+  shortPlayer?: ShortPlayerInfo | null,
+  wl?: WLInfo | null,
+  error?:string|any,
+  win?: number|null,
+  lose?: number|null,
 }
 
 
 
-declare interface ShortUserInfo{
+declare interface ShortPlayerInfo{
   account_id:number,
   avatarfull:string,
   personaname:string,
   last_match_time:string,
   similarity:number
 }
+declare interface WLInfo{
+  win:number,
+  lose:number
+}
 
 
 
-declare interface UserInfo{
+declare interface PlayerInfo{
   tracked_until:string,
   solo_competitive_rank:string,
   competitive_rank:string,
   rank_tier:number,
   leaderboard_rank:number,
   mmr_estimate:EstimateMMR,
-  profile:UserProfile
+  profile:PlayerProfile
 }
 
 
@@ -35,7 +42,7 @@ declare interface EstimateMMR{
   n:number
 }
 
-declare interface UserProfile{
+declare interface PlayerProfile{
   account_id:number,
   personaname:string,
   name:string,

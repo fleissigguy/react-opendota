@@ -6,15 +6,15 @@ import { autobind } from 'core-decorators';
 
 moment.locale('ru');
 
-export namespace SearchUser {
+export namespace SearchPlayer {
   export interface Props {
-    data: ShortUserInfo,
+    data: ShortPlayerInfo,
     handleClick?: Function
   }
 }
 
 
-export default class SearchUser extends React.Component<SearchUser.Props> {
+export default class SearchPlayer extends React.Component<SearchPlayer.Props> {
 
   constructor(props){
     super(props);
@@ -29,8 +29,8 @@ export default class SearchUser extends React.Component<SearchUser.Props> {
   render() {
     const {avatarfull, personaname, account_id, last_match_time} = this.props.data;
     return (
-        <div className="search-user">
-          <Link to={`/user/${account_id}`} onClick={this.handleClick}>
+        <div className="search-player">
+          <Link to={`/player/${account_id}`} onClick={this.handleClick}>
           <img src={avatarfull} alt="" className="avatar"/>
           <label className="name">{personaname}</label>
           {moment(last_match_time).isValid() &&

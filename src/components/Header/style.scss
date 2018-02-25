@@ -1,4 +1,4 @@
-$main-color:rgb(154, 90, 90);
+$main-color:rgb(218, 63, 6);
 $second-color: rgb(245, 245, 245);
 $menu-button-color: rgb(31, 72, 90);
 
@@ -40,7 +40,7 @@ $menu-button-color: rgb(31, 72, 90);
   transition: transform 350ms ease-in-out;
   font-size: 4.2vw;
   color: $main-color;
-  background: $second-color;
+  background: rgba($second-color,0.86);
   padding: 0 14px;
   .nav-showed & {
     pointer-events: all;

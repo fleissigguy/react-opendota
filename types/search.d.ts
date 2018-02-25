@@ -1,6 +1,6 @@
 declare interface SearchStoreState{
   completed?:boolean,
   loading?:boolean,
-  results?:Array<ShortUserInfo>,
+  results?:Array<ShortPlayerInfo>,
   error?:string|any
 }

@@ -16,11 +16,11 @@ import RootEventListener from './utils/RootEventListener';
 const store = configureStore();
 export const history = createBrowserHistory();
 
-const app = () => import(/* webpackMode: "lazy", webpackChunkName: "page.root" */ './containers/App');
-const playground = () => import(/* webpackMode: "lazy", webpackChunkName: "page.playground" */ './containers/Playground');
-const settings = () => import(/* webpackMode: "lazy", webpackChunkName: "page.settings" */ './containers/Settings');
-const search = () => import(/* webpackMode: "lazy", webpackChunkName: "page.search" */ './containers/Search');
-const user = () => import(/* webpackMode: "lazy", webpackChunkName: "page.user" */ './containers/User');
+const app = () => import(/* webpackMode: "lazy", webpackChunkName: "root" */ './containers/App');
+const playground = () => import(/* webpackMode: "lazy", webpackChunkName: "playground" */ './containers/Playground');
+const settings = () => import(/* webpackMode: "lazy", webpackChunkName: "settings" */ './containers/Settings');
+const search = () => import(/* webpackMode: "lazy", webpackChunkName: "search" */ './containers/Search');
+const player = () => import(/* webpackMode: "lazy", webpackChunkName: "player" */ './containers/Player');
 
 const root = ((root: any) => {
   root.addEventListener('scroll', RootEventListener.OnScroll);
@@ -48,9 +48,9 @@ ReactDOM.render(
             moduleProvider={search}/>}>
           </Route>
         </Switch>
-        <ModalRoute className='user-modal' path="/user/:userId" parentPath='/search?query=Mankubus'
+        <ModalRoute className='player-modal' path="/player/:playerId" parentPath='/search?query=Mankubus'
                     component={() => <AsyncComponent
-                      moduleProvider={user}/>}/>
+                      moduleProvider={player}/>}/>
         <ModalContainer history={history}/>
       </div>
     </HashRouter>

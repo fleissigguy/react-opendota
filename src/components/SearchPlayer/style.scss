@@ -1,7 +1,7 @@
 $main-color: rgb(30, 23, 24);
 $second-color: whitesmoke;
 
-.search-user {
+.search-player {
   font-size: 22px;
   line-height: 1.4;
   display: inline-block;
@@ -13,6 +13,9 @@ $second-color: whitesmoke;
   margin: 0 5px;
   cursor: pointer;
   transition: all 0.375s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+  a {
+    border-radius: inherit;
+  }
   &:hover {
     transform: scale(1.4);
     z-index: 2;
