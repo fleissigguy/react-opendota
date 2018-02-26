@@ -10,11 +10,10 @@ $negative-color: rgb(236, 109, 109);
   left: auto;
   top: 0;
   right: 0;
-  padding: 23vh 0;
+  padding: 0;
   animation: show-player-modal .279s forwards;
   color: $second-color;
   font-size: 27px;
-  background: rgba($main-color,0.94);
   &.hide {
     animation-direction: reverse;
   }
@@ -24,6 +23,17 @@ $negative-color: rgb(236, 109, 109);
   display: flex;
   justify-content: center;
   flex-direction: column;
+  height: 100%;
+  .player-info {
+    overflow-y: auto;
+    height: inherit;
+    background: rgba($main-color, 0.94);
+    padding-top: 23vh;
+    > div{
+      z-index: 2;
+      position: relative;
+    }
+  }
 }
 
 @keyframes show-player-modal {
@@ -110,6 +120,13 @@ $negative-color: rgb(236, 109, 109);
     background: rgba($second-color,0.09);
     padding: 0 8px;
     border-radius: 4px;
+    font-weight: 100;
+    &.famous{
+      background: transparent;
+      color: #ffff73;
+      text-shadow: 0 0px 14px rgb(174, 174, 22);
+      font-weight: normal;
+    }
   }
 }
 

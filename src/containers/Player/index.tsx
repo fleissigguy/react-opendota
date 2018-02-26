@@ -109,17 +109,19 @@ export default class Player extends React.Component<Player.Props, Player.State> 
           <span className='button-bar'/>
           <span className='button-bar'/>
         </button>
+        {/*{fullPlayerLoaded && fullPlayer.profile &&*/}
+        {false && false &&
+        <PlayerWordCloud playerId={fullPlayer.profile.account_id}/>}
         {fullPlayerLoaded ?
           fullPlayer.profile ?
-            <div>
-              <PlayerWordCloud playerId={fullPlayer.profile.account_id}/>
+            <div className='player-info'>
               <div className="main-player-info">
                 <div className="left-side-info">
                   <img src={fullPlayer.profile.avatarfull} alt="" className="player-avatar"/>
                 </div>
                 <div className="right-side-info">
                   <div className="short-info">
-                    <label className="player-name">{fullPlayer.profile.name || fullPlayer.profile.personaname}</label>
+                    <label className={`player-name ${fullPlayer.profile.name && 'famous'}`}>{fullPlayer.profile.name || fullPlayer.profile.personaname}</label>
                   </div>
                   <Player.WLInfo wl={wl}/>
                   <Player.MMR solo={fullPlayer.solo_competitive_rank} party={fullPlayer.competitive_rank}

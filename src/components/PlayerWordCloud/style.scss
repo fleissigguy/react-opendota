@@ -1,7 +1,7 @@
 
 .tag-cloud {
   position: fixed;
-  z-index: -1;
+  z-index: 1;
   filter: blur(1px);
   opacity: 0.5;
   left: 10%;
@@ -11,13 +11,12 @@
   &:hover{
     filter: blur(0px);
     opacity: 1;
-    ~div {
+    ~ .player-info > div{
       filter: blur(5px);
       opacity: .4;
     }
   }
 }
-
 .tag-cloud-tag {
   line-height: 0;
   user-select: none;
