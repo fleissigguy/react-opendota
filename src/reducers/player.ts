@@ -5,10 +5,8 @@ const initialState: PlayerStoreState = {
   completed: false,
   error:null,
   loading: false,
-  shortPlayer: null,
   fullPlayer: null,
-  win:null,
-  lose:null
+  wl: null
 };
 
 export default handleActions<PlayerStoreState>({
@@ -24,11 +22,5 @@ export default handleActions<PlayerStoreState>({
   },
   [PlayerActions.SET_DEFAULT_STATE]: () => {
     return {...initialState}
-  },
-  [PlayerActions.SET_SHORT_PLAYER]: (state, action) => {
-    return {
-      ...state,
-      shortPlayer:{...action.payload} as ShortPlayerInfo
-    };
   }
 }, initialState);

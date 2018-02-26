@@ -2,27 +2,15 @@ declare interface PlayerStoreState{
   completed?:boolean,
   loading?:boolean,
   fullPlayer?:PlayerInfo | null,
-  shortPlayer?: ShortPlayerInfo | null,
   wl?: WLInfo | null,
-  error?:string|any,
-  win?: number|null,
-  lose?: number|null,
+  error?:string|any
 }
 
 
-
-declare interface ShortPlayerInfo{
-  account_id:number,
-  avatarfull:string,
-  personaname:string,
-  last_match_time:string,
-  similarity:number
-}
 declare interface WLInfo{
   win:number,
   lose:number
 }
-
 
 
 declare interface PlayerInfo{

@@ -21,3 +21,4 @@ export default handleActions<SearchStoreState>({
     return {...initialState}
   }
 }, initialState);
+
