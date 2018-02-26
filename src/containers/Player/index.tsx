@@ -71,6 +71,7 @@ export default class Player extends React.Component<Player.Props, Player.State> 
     if (!loading && !fullPlayer) {
       return null;
     }
+    const percentWins:number = +(wl.win / (wl.win + wl.lose) * 100).toFixed(2);
     return (
       <div className={`modal player ${this.state.hideModalTrigger && 'hide'}`}>
         <button className="close-modal-button" onClick={this.closeModal}>
@@ -85,11 +86,14 @@ export default class Player extends React.Component<Player.Props, Player.State> 
               </div>
               <div className="right-side-info">
                 <div className="short-info">
-                  <label className="player-name">{fullPlayer.profile.personaname}</label>
+                  <label className="player-name">{fullPlayer.profile.name || fullPlayer.profile.personaname}</label>
                   <label className="account-id">{fullPlayer.profile.account_id}</label>
                 </div>
                 <div className="wl">
-                  <label className="percent">{(wl.win / (wl.win + wl.lose) * 100).toFixed(2)}</label>
+                  <label className="percent" style={{
+                    background:`hsl(${percentWins*1.2+(percentWins>49?2:0)},${22 + percentWins/10}%,${28 + percentWins/5}%)`,
+                    color:`hsl(${percentWins*1.2+(percentWins>49?2:0)},${22 + percentWins/10}%,89%)`
+                  }}>{percentWins}</label>
                   <label className="wins">{wl.win}</label>
                   <label className="loses">{wl.lose}</label>
                 </div>

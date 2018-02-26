@@ -1,4 +1,4 @@
-$main-color: rgb(26, 45, 56);
+$main-color: rgb(14, 31, 41);
 $second-color: rgb(245, 245, 245);
 $positive-color: rgb(144, 236, 114);
 $negative-color: rgb(236, 109, 109);
@@ -71,21 +71,22 @@ $negative-color: rgb(236, 109, 109);
 .main-player-info {
   display: flex;
   flex-direction: row;
-  margin-bottom: 50px;
+  margin-bottom: 15px;
 }
 
 .left-side-info {
   display: flex;
+  justify-content: center;
+  flex-direction: column;
   .player-avatar {
-    border-radius: inherit;
+    border-radius: 8px;
     width: 256px;
     height: 256px;
-    border: 4px solid rgba($second-color,0.5);
   }
 }
 
 .right-side-info {
-  margin-left: 50px;
+  margin-left: 15px;
   flex: 1;
   > div:not(:first-child) {
     margin-top: 15px;
@@ -101,10 +102,11 @@ $negative-color: rgb(236, 109, 109);
     //background: rgb(76, 107, 125);
     background: rgba($second-color,0.09);
     padding: 0 8px;
+    border-radius: 4px;
   }
   .account-id{
     margin-left: 15px;
-    color: rgba($second-color,0.61);
+    color: rgba($second-color,0.35);
   }
 }
 
@@ -118,19 +120,23 @@ $negative-color: rgb(236, 109, 109);
     }
   }
   .percent{
+    padding: 0 5px;
+    background: hsl(36,30%,46%);
+    border-radius: 4px;
     &:before{
       content: 'WINRATE';
     }
-    padding-right: 5px;
     &:after{
       content:'%';
     }
   }
   .wins,.loses{
     padding: 0 5px;
+    border-radius: 4px;
   }
   .wins{
     color: $positive-color;
+    background: rgb(31, 84, 14);
     &:before{
       content: 'WINS';
       color: rgba($positive-color,0.74);
@@ -138,6 +144,7 @@ $negative-color: rgb(236, 109, 109);
   }
   .loses{
     color: $negative-color;
+    background: rgb(97, 49, 49);
     &:before{
       content: 'LOSES';
       color: rgba($negative-color,0.74);
