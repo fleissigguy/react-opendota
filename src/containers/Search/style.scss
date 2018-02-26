@@ -19,21 +19,24 @@ $second-color: whitesmoke;
   &:before{
     content: '';
     width: 100%;
-    height: 256px;
+    height: 43%;
     position: absolute;
-    top: -256px;
+    top: auto;
+    max-height: 210px;
+    bottom: 100%;
     left: 0;
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 51%, 65% 86%, 38% 59%, 22% 86%, 0% 27%);
-    clip-path: polygon(0% 100%, 100% 100%, 100% 51%, 65% 86%, 38% 59%, 22% 86%, 0% 27%);
-    background: rgba($main-color, 0.5);
+    z-index: -1;
+    -webkit-clip-path: polygon(0% 102%, 100% 102%, 100% 30%, 65% 85%, 38% 53%, 22% 86%, 0% 22%);
+    clip-path: polygon(0% 102%, 100% 102%, 100% 30%, 65% 85%, 38% 53%, 22% 86%, 0% 22%);
+    background: rgba(0, 0, 0, 0.5);
     transition: all 0.375s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
   }
   .root-scrolled &{
     &:before{
-      height: 40vh;
-      top: -40vh;
-      -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      height: 27%;
+      max-height: none;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 102%, 0% 102%);
+      clip-path: polygon(0 0, 100% 0, 100% 102%, 0% 102%);
     }
   }
 
