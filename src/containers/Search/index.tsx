@@ -48,9 +48,6 @@ export class Search extends React.Component<Search.Props> {
     }
   }
 
-  componentWillUnmount(){
-  }
-
   componentWillReceiveProps(newProps) {
     // if(newProps.search.loading){
     //   this.context.router.

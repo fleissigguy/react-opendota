@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as PlayerActions from '../../actions/player';
 import './style.scss';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import {RouteComponentProps} from 'react-router';
-import {autobind} from 'core-decorators';
+import { RouteComponentProps } from 'react-router';
+import { autobind } from 'core-decorators';
 import PlayerWordCloud from "../../components/PlayerWordCloud";
 
 
@@ -23,9 +23,11 @@ export namespace Player {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Player extends React.Component<Player.Props, Player.State> {
+  historyUnlistener:Function;
   state = {
     hideModalTrigger: false
   };
+  static lastRoute:string;
   static contextTypes = {
     router: PropTypes.object
   };
@@ -36,6 +38,12 @@ export default class Player extends React.Component<Player.Props, Player.State> 
 
   componentWillMount() {
     document.body.classList.add('rescale-background');
+    this.historyUnlistener = this.context.router.history.listen(location => {
+      const playerId = location.pathname.split('/player/')[1];
+      if(playerId){
+        this.props.actions.getFullPlayer(+playerId);
+      }
+    });
     const playerId = this.context.router.route.location.pathname.split('/player/')[1];
     if (playerId) {
       this.props.actions.getFullPlayer(+playerId);
@@ -44,10 +52,14 @@ export default class Player extends React.Component<Player.Props, Player.State> 
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // if (!prevState.hideModalTrigger && this.state.hideModalTrigger) {
-    // }
+  componentWillReceiveProps(nextProps) {
   }
+
+
+  componentWillUpdate(nextProps, nextState, nextContext) {
+  }
+  // if (!prevState.hideModalTrigger && this.state.hideModalTrigger) {
+  // }
 
   @autobind()
   closeModal(e) {
@@ -57,13 +69,14 @@ export default class Player extends React.Component<Player.Props, Player.State> 
 
   componentWillUnmount() {
     document.body.classList.remove('rescale-background');
+    this.historyUnlistener();
   }
 
   static WLInfo({wl}) {
     const gamesCount = wl.win + wl.lose;
     const percentWins: number = !(wl.win + wl.lose) ? 0.00 : +(wl.win / gamesCount * 100).toFixed(2);
     // const percentWins: number = 56;
-    const isGoodPlayer = percentWins > 85 && gamesCount > 1200;
+    const isGoodPlayer = percentWins > 75 && gamesCount > 800;
     const colorStep = percentWins < 49 ? 1.2 : 1.8;
     return (
       <div className="wl">
@@ -109,8 +122,7 @@ export default class Player extends React.Component<Player.Props, Player.State> 
           <span className='button-bar'/>
           <span className='button-bar'/>
         </button>
-        {/*{fullPlayerLoaded && fullPlayer.profile &&*/}
-        {false && false &&
+        {fullPlayerLoaded && fullPlayer.profile &&
         <PlayerWordCloud playerId={fullPlayer.profile.account_id}/>}
         {fullPlayerLoaded ?
           fullPlayer.profile ?
@@ -121,7 +133,8 @@ export default class Player extends React.Component<Player.Props, Player.State> 
                 </div>
                 <div className="right-side-info">
                   <div className="short-info">
-                    <label className={`player-name ${fullPlayer.profile.name && 'famous'}`}>{fullPlayer.profile.name || fullPlayer.profile.personaname}</label>
+                    <label
+                      className={`player-name ${fullPlayer.profile.name && 'famous'}`}>{fullPlayer.profile.name || fullPlayer.profile.personaname}</label>
                   </div>
                   <Player.WLInfo wl={wl}/>
                   <Player.MMR solo={fullPlayer.solo_competitive_rank} party={fullPlayer.competitive_rank}

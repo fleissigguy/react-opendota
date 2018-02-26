@@ -48,7 +48,7 @@ ReactDOM.render(
             moduleProvider={search}/>}>
           </Route>
         </Switch>
-        <ModalRoute className='player-modal' path="/player/:playerId" parentPath='/search?query=Mankubus'
+        <ModalRoute className='player-modal' path="/player/:playerId"
                     component={() => <AsyncComponent
                       moduleProvider={player}/>}/>
         <ModalContainer history={history}/>
