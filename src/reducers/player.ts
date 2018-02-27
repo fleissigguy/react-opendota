@@ -11,10 +11,6 @@ const initialState: PlayerStoreState = {
 
 export default handleActions<PlayerStoreState>({
   [PlayerActions.PLAYER_REQUEST]: (state, action) => {
-    console.log('l', {
-      ...state,
-      ...action.payload
-    });
     return {
       ...state,
       ...action.payload

@@ -47,10 +47,10 @@ ReactDOM.render(
           <Route path="/search" component={() => <AsyncComponent
             moduleProvider={search}/>}>
           </Route>
+          <ModalRoute className='player-modal' path="/player/:playerId"
+                      component={() => <AsyncComponent
+                        moduleProvider={player}/>} />
         </Switch>
-        <ModalRoute className='player-modal' path="/player/:playerId"
-                    component={() => <AsyncComponent
-                      moduleProvider={player}/>}/>
         <ModalContainer history={history}/>
       </div>
     </HashRouter>

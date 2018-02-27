@@ -1,7 +1,7 @@
 export default abstract class PageInformer {
   private static pageDescriptionSelector?: HTMLDivElement;
 
-  static setPageInfo(title?: string, description: string = '') {
+  static setPageInfo(title?: string, description: any = '') {
     if (title) {
       document.querySelector('title').text = title + ' | MOBA';
     }

@@ -1,13 +1,15 @@
 import * as React from 'react';
 import * as PlayerActions from '../../actions/player';
 import './style.scss';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {Link, NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import { RouteComponentProps } from 'react-router';
-import { autobind } from 'core-decorators';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import {RouteComponentProps} from 'react-router';
+import {autobind} from 'core-decorators';
 import PlayerWordCloud from "../../components/PlayerWordCloud";
+import PageInformer from "../../utils/PageInformer";
 
 
 export namespace Player {
@@ -23,11 +25,11 @@ export namespace Player {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Player extends React.Component<Player.Props, Player.State> {
-  historyUnlistener:Function;
+  historyUnlistener: Function;
   state = {
     hideModalTrigger: false
   };
-  static lastRoute:string;
+  pageInfoUpdated: boolean = false;
   static contextTypes = {
     router: PropTypes.object
   };
@@ -38,18 +40,21 @@ export default class Player extends React.Component<Player.Props, Player.State> 
 
   componentWillMount() {
     document.body.classList.add('rescale-background');
-    this.historyUnlistener = this.context.router.history.listen(location => {
-      const playerId = location.pathname.split('/player/')[1];
-      if(playerId){
-        this.props.actions.getFullPlayer(+playerId);
-      }
-    });
-    const playerId = this.context.router.route.location.pathname.split('/player/')[1];
-    if (playerId) {
-      this.props.actions.getFullPlayer(+playerId);
-    } else {
+    this.historyUnlistener = this.context.router.history.listen(this.getFullPlayer);
+    PageInformer.setPageInfo('Игрок', 'Нет информации');
+    if (!this.getFullPlayer(this.context.router.route.location)) {
       this.context.router.goBack();
     }
+  }
+
+  @autobind()
+  getFullPlayer(location) {
+    console.log('getFullPlayer', location);
+    const playerId = this.getPlayerIdFromLocation(location);
+    if (playerId) {
+      this.props.actions.getFullPlayer(playerId);
+    }
+    return !!playerId;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,8 +63,23 @@ export default class Player extends React.Component<Player.Props, Player.State> 
 
   componentWillUpdate(nextProps, nextState, nextContext) {
   }
-  // if (!prevState.hideModalTrigger && this.state.hideModalTrigger) {
-  // }
+
+
+  getPlayerIdFromLocation(location) {
+    const parsedPathname = location.pathname.split('/');
+    return +parsedPathname[parsedPathname.indexOf('player') + 1];
+  }
+
+
+  componentDidUpdate() {
+    if (!this.pageInfoUpdated && this.props.player.fullPlayer && this.props.player.fullPlayer.profile) {
+      if (this.props.player.fullPlayer.profile.account_id === this.getPlayerIdFromLocation(this.context.router.route.location)) {
+        this.pageInfoUpdated = true;
+        PageInformer.setPageInfo(this.props.player.fullPlayer.profile.personaname,
+          this.props.player.fullPlayer.profile.account_id);
+      }
+    }
+  }
 
   @autobind()
   closeModal(e) {
@@ -76,7 +96,7 @@ export default class Player extends React.Component<Player.Props, Player.State> 
     const gamesCount = wl.win + wl.lose;
     const percentWins: number = !(wl.win + wl.lose) ? 0.00 : +(wl.win / gamesCount * 100).toFixed(2);
     // const percentWins: number = 56;
-    const isGoodPlayer = percentWins > 75 && gamesCount > 800;
+    const isGoodPlayer = percentWins > 60 && gamesCount > 2000;
     const colorStep = percentWins < 49 ? 1.2 : 1.8;
     return (
       <div className="wl">
@@ -105,6 +125,11 @@ export default class Player extends React.Component<Player.Props, Player.State> 
     )
   }
 
+  @autobind
+  handleTabClick(pathname){
+    this.context.router.history.push(`${this.context.router.route.location.pathname}/${pathname}`)
+  }
+
   render() {
     const {
       fullPlayer,
@@ -113,12 +138,14 @@ export default class Player extends React.Component<Player.Props, Player.State> 
       completed
     } = this.props.player;
     const fullPlayerLoaded = !loading && completed;
+    // const fullPlayerLoaded = false;
     if (!loading && !fullPlayer && !wl) {
       return null;
     }
     return (
       <div className={`modal player ${this.state.hideModalTrigger && 'hide'}`}>
         <button className="close-modal-button" onClick={this.closeModal}>
+          <span className='button-bar'/>
           <span className='button-bar'/>
           <span className='button-bar'/>
         </button>
@@ -135,19 +162,75 @@ export default class Player extends React.Component<Player.Props, Player.State> 
                   <div className="short-info">
                     <label
                       className={`player-name ${fullPlayer.profile.name && 'famous'}`}>{fullPlayer.profile.name || fullPlayer.profile.personaname}</label>
+                    {fullPlayer.profile.name &&
+                    <label className="player-name persona">{fullPlayer.profile.personaname}</label>}
                   </div>
                   <Player.WLInfo wl={wl}/>
                   <Player.MMR solo={fullPlayer.solo_competitive_rank} party={fullPlayer.competitive_rank}
                               estimate={fullPlayer.mmr_estimate}/>
                 </div>
               </div>
+              <div className='tab-list'>
+                <NavLink to='/overview' replace  activeClassName='active'><img src="../../assets/icons/overview.png" alt=""/></NavLink>
+                {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
+                {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
+                {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
+                {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
+              </div>
+              {/*<Tabs onSelect={this.handleTabClick}>*/}
+                {/*<TabList>*/}
+                  {/*<Tab>*/}
+                      {/*<img src="../../assets/icons/overview.png" alt=""/>*/}
+                  {/*</Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/match.svg" alt=""/></Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/helmet.png" alt=""/></Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/peer.svg" alt=""/></Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/record.svg" alt=""/></Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/totals.svg" alt=""/></Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/histogram.png" alt=""/></Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/trends.png" alt=""/></Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/ward.svg" alt=""/></Tab>*/}
+                  {/*<Tab><img src="../../assets/icons/ranking.svg" alt=""/></Tab>*/}
+                {/*</TabList>*/}
+
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 1</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 2</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 3</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 4</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 5</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 6</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 7</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 8</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 9</h2>*/}
+                {/*</TabPanel>*/}
+                {/*<TabPanel>*/}
+                  {/*<h2>Any content 10</h2>*/}
+                {/*</TabPanel>*/}
+              {/*</Tabs>*/}
             </div>
             :
             <div className="player-not-found">
               Такого пользователя не существует
             </div>
           :
-          <div className="full-player-loading">Основная информация по игроку загружается...</div>}
+          <div className="full-player-loading"/>}
       </div>
     )
   }
