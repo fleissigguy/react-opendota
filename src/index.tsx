@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router';
-import {HashRouter} from 'react-router-dom';
+import { HashRouter, Link } from 'react-router-dom';
 import { ModalContainer, ModalRoute } from 'react-router-modal';
 import { createBrowserHistory } from 'history';
 import { configureStore } from './store';
@@ -28,6 +28,11 @@ const root = ((root: any) => {
   return root;
 })(document.getElementById('root'));
 
+const Shit =(props) => {
+  console.log(props);
+  return null;
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
@@ -49,14 +54,16 @@ ReactDOM.render(
           </Route>
           <ModalRoute className='player-modal' path="/player/:playerId"
                       component={() => <AsyncComponent
-                        moduleProvider={player}/>} />
+                        moduleProvider={player}/>}>
+            <Shit/>
+          </ModalRoute>
         </Switch>
         <ModalContainer history={history}/>
       </div>
     </HashRouter>
   </Provider>
-,
-root
+  ,
+  root
 );
 setTimeout(() => {
   document.querySelector('.lw').remove();

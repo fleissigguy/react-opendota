@@ -2,12 +2,16 @@
 .tag-cloud {
   position: fixed;
   z-index: 1;
-  filter: blur(1px);
-  opacity: 0.5;
+  filter: blur(3px);
   left: 10%;
   width: 80%;
   top: 18%;
   text-align: center;
+  opacity: 0;
+  transition: opacity 375ms linear;
+  &.show{
+    opacity: 0.5;
+  }
   &:hover{
     filter: blur(0px);
     opacity: 1;

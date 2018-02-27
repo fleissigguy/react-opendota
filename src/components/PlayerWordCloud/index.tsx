@@ -49,8 +49,8 @@ export default class PlayerWordCloud extends React.Component<PlayerWordCloud.Pro
     return (
       <TagCloud minSize={15}
                 maxSize={87}
-                shuffle={false}
                 colorOptions={{luminosity: 'light'}}
+                className={`tag-cloud ${this.state.words.length && 'show'}`}
                 tags={this.state.words}
                 style={this.state.words.length < 30 ? {
                   left: '32.5%',

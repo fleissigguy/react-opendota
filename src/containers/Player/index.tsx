@@ -5,8 +5,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Link, NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
-import {RouteComponentProps} from 'react-router';
+import { Route, RouteComponentProps } from 'react-router';
 import {autobind} from 'core-decorators';
 import PlayerWordCloud from "../../components/PlayerWordCloud";
 import PageInformer from "../../utils/PageInformer";
@@ -16,6 +15,7 @@ export namespace Player {
   export interface Props extends RouteComponentProps<void> {
     player: PlayerStoreState;
     actions: typeof PlayerActions;
+    children: any;
   }
 
   export interface State {
@@ -139,6 +139,7 @@ export default class Player extends React.Component<Player.Props, Player.State> 
     } = this.props.player;
     const fullPlayerLoaded = !loading && completed;
     // const fullPlayerLoaded = false;
+    console.log(this.props);
     if (!loading && !fullPlayer && !wl) {
       return null;
     }
@@ -171,7 +172,7 @@ export default class Player extends React.Component<Player.Props, Player.State> 
                 </div>
               </div>
               <div className='tab-list'>
-                <NavLink to='/overview' replace  activeClassName='active'><img src="../../assets/icons/overview.png" alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/overview`} activeClassName='active'><img src="../../assets/icons/overview.png" alt=""/></NavLink>
                 {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
                 {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
                 {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
