@@ -1,8 +1,9 @@
 import * as React from 'react';
 import './style.scss';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-export namespace Trends {
+export namespace Overview {
   export interface Props {
   }
 
@@ -12,15 +13,15 @@ export namespace Trends {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class Trends extends React.Component<Trends.Props, Trends.State> {
+export class Overview extends React.Component<Overview.Props, Overview.State> {
 
   componentWillMount(){
   }
 
   render() {
     return (
-      <div className='tab-content overview'>
-        ЗДАРОВА Я Trends)))0
+      <div className='tab-content-overview'>
+        ЗДАРОВА Я OVERVIEW)))0
       </div>
     );
   }

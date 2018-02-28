@@ -2,7 +2,7 @@ import * as React from 'react';
 import './style.scss';
 import { connect } from 'react-redux';
 
-export namespace Heroes {
+export namespace Records {
   export interface Props {
   }
 
@@ -12,15 +12,15 @@ export namespace Heroes {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class Heroes extends React.Component<Heroes.Props, Heroes.State> {
+export class Records extends React.Component<Records.Props, Records.State> {
 
   componentWillMount(){
   }
 
   render() {
     return (
-      <div className='tab-content overview'>
-        ЗДАРОВА Я Heroes)))0
+      <div className='tab-content-overview'>
+        ЗДАРОВА Я Records)))0
       </div>
     );
   }

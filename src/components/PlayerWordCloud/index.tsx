@@ -24,6 +24,7 @@ export default class PlayerWordCloud extends React.Component<PlayerWordCloud.Pro
   state = {
     words: []
   };
+  isMount = false;
 
   constructor(props) {
     super(props);
@@ -32,14 +33,23 @@ export default class PlayerWordCloud extends React.Component<PlayerWordCloud.Pro
   componentWillMount() {
     if (this.props.playerId) {
       axios.get(`https://api.opendota.com/api/players/${this.props.playerId}/wordcloud`).then((response) => {
-        this.setState({
-          words: Object.keys(response.data.my_word_counts).map(key => ({
-            value: key,
-            count: response.data.my_word_counts[key]
-          }))
-        })
+        if(this.isMount && response.config.url.indexOf(this.props.playerId+'') !== -1){
+          this.setState({
+            words: Object.keys(response.data.my_word_counts).map(key => ({
+              value: key,
+              count: response.data.my_word_counts[key]
+            }))
+          });
+        }
       });
     }
+  }
+  componentDidMount(){
+    this.isMount=true;
+  }
+
+  componentWillUnmount(){
+    this.isMount=false;
   }
 
   colorOptions= {

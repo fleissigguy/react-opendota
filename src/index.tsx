@@ -23,7 +23,6 @@ const search = () => import(/* webpackMode: "lazy", webpackChunkName: "search" *
 const player = () => import(/* webpackMode: "lazy", webpackChunkName: "player" */ './containers/Player');
 
 
-const overview = () => import(/* webpackMode: "lazy", webpackChunkName: "player-overview" */ './components/PlayerTabsContent/views/Overview');
 
 
 const root = ((root: any) => {

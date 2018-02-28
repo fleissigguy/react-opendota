@@ -33,7 +33,6 @@ $second-color: whitesmoke;
   }
   .root-scrolled &{
     &:before{
-      height: 27%;
       max-height: none;
       -webkit-clip-path: polygon(0 0, 100% 0, 100% 102%, 0% 102%);
       clip-path: polygon(0 0, 100% 0, 100% 102%, 0% 102%);

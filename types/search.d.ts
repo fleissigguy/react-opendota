@@ -2,7 +2,8 @@ declare interface SearchStoreState{
   completed?:boolean,
   loading?:boolean,
   results?:Array<ShortPlayerInfo>,
-  error?:string|any
+  error?:string|any,
+  query?: string
 }
 
 declare interface ShortPlayerInfo{
