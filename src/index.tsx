@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router';
-import { HashRouter, Link } from 'react-router-dom';
-import { ModalContainer, ModalRoute } from 'react-router-modal';
-import { createBrowserHistory } from 'history';
-import { configureStore } from './store';
-import { AsyncComponent } from './utils/AsyncComponentLoader';
-import { Header } from './components/Header/index';
+import {Provider} from 'react-redux';
+import {Route, Switch} from 'react-router';
+import {HashRouter, Link} from 'react-router-dom';
+import {ModalContainer, ModalRoute} from 'react-router-modal';
+import {createBrowserHistory} from 'history';
+import {configureStore} from './store';
+import {AsyncComponent} from './utils/AsyncComponentLoader';
+import {Header} from './components/Header/index';
 import './style.scss';
 
 require('moment/locale/ru');
@@ -22,21 +22,21 @@ const settings = () => import(/* webpackMode: "lazy", webpackChunkName: "setting
 const search = () => import(/* webpackMode: "lazy", webpackChunkName: "search" */ './containers/Search');
 const player = () => import(/* webpackMode: "lazy", webpackChunkName: "player" */ './containers/Player');
 
+
+const overview = () => import(/* webpackMode: "lazy", webpackChunkName: "player-overview" */ './components/PlayerTabsContent/views/Overview');
+
+
 const root = ((root: any) => {
   root.addEventListener('scroll', RootEventListener.OnScroll);
 
   return root;
 })(document.getElementById('root'));
 
-const Shit =(props) => {
-  console.log(props);
-  return null;
-};
-
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
       <div className='page-content'>
+        <ModalContainer history={history}/>
         <div className='page-background'/>
         <h2 className='page-description'/>
         <Header/>
@@ -52,13 +52,9 @@ ReactDOM.render(
           <Route path="/search" component={() => <AsyncComponent
             moduleProvider={search}/>}>
           </Route>
-          <ModalRoute className='player-modal' path="/player/:playerId"
-                      component={() => <AsyncComponent
-                        moduleProvider={player}/>}>
-            <Shit/>
+          <ModalRoute className='player-modal' path="/player/:playerId" component={() => (<AsyncComponent moduleProvider={player}/>)}>
           </ModalRoute>
         </Switch>
-        <ModalContainer history={history}/>
       </div>
     </HashRouter>
   </Provider>

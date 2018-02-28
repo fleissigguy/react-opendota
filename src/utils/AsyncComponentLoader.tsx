@@ -12,6 +12,7 @@ declare interface AsyncComponentState {
 
 export class AsyncComponent extends React.Component<AsyncComponentProps, AsyncComponentState> {
   private isLoaded: boolean = false;
+  private isMount: boolean = false;
 
   constructor(props: any) {
     super(props);
@@ -24,9 +25,18 @@ export class AsyncComponent extends React.Component<AsyncComponentProps, AsyncCo
     if (!this.isLoaded) {
       this.isLoaded = true;
       this.props.moduleProvider().then((provideData: any) => {
-        this.setState({LoadedAsyncComponent: provideData[Object.keys(provideData)[0]]});
+          if(this.isMount){
+            this.setState({LoadedAsyncComponent: provideData[Object.keys(provideData)[0]]});
+          }
       });
     }
+  }
+  componentDidMount(){
+    this.isMount = true;
+  }
+
+  componentWillUnmount(){
+    this.isMount = false;
   }
 
   render() {

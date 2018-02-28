@@ -3,12 +3,18 @@ import * as PlayerActions from '../../actions/player';
 import './style.scss';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Link, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Route, RouteComponentProps } from 'react-router';
+import {Route, RouteComponentProps} from 'react-router';
 import {autobind} from 'core-decorators';
 import PlayerWordCloud from "../../components/PlayerWordCloud";
 import PageInformer from "../../utils/PageInformer";
+import {AsyncComponent} from "../../utils/AsyncComponentLoader";
+import * as ReactDOM from 'react-dom';
+import PlayerNavigation from "./components/PlayerNavigation";
+import {Header} from "../../components/Header";
+
+
 
 
 export namespace Player {
@@ -19,15 +25,19 @@ export namespace Player {
   }
 
   export interface State {
-    hideModalTrigger: boolean
+    hideModalTrigger: boolean;
+    activeTab: string;
+    activeTabContent: any;
   }
 }
 
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps, null, {pure:false})
 export default class Player extends React.Component<Player.Props, Player.State> {
   historyUnlistener: Function;
   state = {
-    hideModalTrigger: false
+    hideModalTrigger: false,
+    activeTab: 'overview',
+    activeTabContent: null
   };
   pageInfoUpdated: boolean = false;
   static contextTypes = {
@@ -40,7 +50,6 @@ export default class Player extends React.Component<Player.Props, Player.State> 
 
   componentWillMount() {
     document.body.classList.add('rescale-background');
-    this.historyUnlistener = this.context.router.history.listen(this.getFullPlayer);
     PageInformer.setPageInfo('Игрок', 'Нет информации');
     if (!this.getFullPlayer(this.context.router.route.location)) {
       this.context.router.goBack();
@@ -49,7 +58,6 @@ export default class Player extends React.Component<Player.Props, Player.State> 
 
   @autobind()
   getFullPlayer(location) {
-    console.log('getFullPlayer', location);
     const playerId = this.getPlayerIdFromLocation(location);
     if (playerId) {
       this.props.actions.getFullPlayer(playerId);
@@ -58,10 +66,6 @@ export default class Player extends React.Component<Player.Props, Player.State> 
   }
 
   componentWillReceiveProps(nextProps) {
-  }
-
-
-  componentWillUpdate(nextProps, nextState, nextContext) {
   }
 
 
@@ -84,12 +88,11 @@ export default class Player extends React.Component<Player.Props, Player.State> 
   @autobind()
   closeModal(e) {
     e.preventDefault();
-    this.context.router.history.goBack();
+    this.context.router.history.push('/'+Header.PreviousRoute + Header.PreviousRouteQuery);
   }
 
   componentWillUnmount() {
     document.body.classList.remove('rescale-background');
-    this.historyUnlistener();
   }
 
   static WLInfo({wl}) {
@@ -126,7 +129,7 @@ export default class Player extends React.Component<Player.Props, Player.State> 
   }
 
   @autobind
-  handleTabClick(pathname){
+  handleTabClick(pathname) {
     this.context.router.history.push(`${this.context.router.route.location.pathname}/${pathname}`)
   }
 
@@ -138,8 +141,6 @@ export default class Player extends React.Component<Player.Props, Player.State> 
       completed
     } = this.props.player;
     const fullPlayerLoaded = !loading && completed;
-    // const fullPlayerLoaded = false;
-    console.log(this.props);
     if (!loading && !fullPlayer && !wl) {
       return null;
     }
@@ -171,60 +172,7 @@ export default class Player extends React.Component<Player.Props, Player.State> 
                               estimate={fullPlayer.mmr_estimate}/>
                 </div>
               </div>
-              <div className='tab-list'>
-                <NavLink to={`/player/${fullPlayer.profile.account_id}/overview`} activeClassName='active'><img src="../../assets/icons/overview.png" alt=""/></NavLink>
-                {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
-                {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
-                {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
-                {/*<NavLink to='/overview' replace><img src="../../assets/icons/overview.png" alt=""/></NavLink>*/}
-              </div>
-              {/*<Tabs onSelect={this.handleTabClick}>*/}
-                {/*<TabList>*/}
-                  {/*<Tab>*/}
-                      {/*<img src="../../assets/icons/overview.png" alt=""/>*/}
-                  {/*</Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/match.svg" alt=""/></Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/helmet.png" alt=""/></Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/peer.svg" alt=""/></Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/record.svg" alt=""/></Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/totals.svg" alt=""/></Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/histogram.png" alt=""/></Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/trends.png" alt=""/></Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/ward.svg" alt=""/></Tab>*/}
-                  {/*<Tab><img src="../../assets/icons/ranking.svg" alt=""/></Tab>*/}
-                {/*</TabList>*/}
-
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 1</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 2</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 3</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 4</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 5</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 6</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 7</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 8</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 9</h2>*/}
-                {/*</TabPanel>*/}
-                {/*<TabPanel>*/}
-                  {/*<h2>Any content 10</h2>*/}
-                {/*</TabPanel>*/}
-              {/*</Tabs>*/}
+              <PlayerNavigation playerId={fullPlayer.profile.account_id}/>
             </div>
             :
             <div className="player-not-found">
@@ -237,10 +185,10 @@ export default class Player extends React.Component<Player.Props, Player.State> 
   }
 }
 
-
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
-    player: state.player
+    player: state.player,
+    ...props
   }
 }
 
@@ -249,3 +197,28 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(PlayerActions as any, dispatch)
   }
 }
+
+/*
+
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/overview`} activeClassName='active'>
+                  <img src="../../assets/icons/overview.png" alt=""/>
+                </NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/matches`} activeClassName='active'><img
+                  src="../../assets/icons/match.svg" alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/heroes`} activeClassName='active'><img
+                  src="../../assets/icons/helmet.png" alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/peers`} activeClassName='active'><img
+                  src="../../assets/icons/peer.svg" alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/records`} activeClassName='active'><img
+                  src="../../assets/icons/record.svg" alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/totals`} activeClassName='active'><img
+                  src="../../assets/icons/totals.svg" alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/histograms`} activeClassName='active'><img
+                  src="../../assets/icons/histogram.png " alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/trends`} activeClassName='active'><img
+                  src="../../assets/icons/trends.png" alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/wardmap`} activeClassName='active'><img
+                  src="../../assets/icons/ward.svg" alt=""/></NavLink>
+                <NavLink to={`/player/${fullPlayer.profile.account_id}/rankings`} activeClassName='active'><img
+                  src="../../assets/icons/ranking.svg" alt=""/></NavLink>
+ */
