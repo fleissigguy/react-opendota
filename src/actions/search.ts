@@ -12,6 +12,7 @@ export const searchPlayers = query => async dispatch => {
     dispatch(searchPlayersRequest({
       loading: false,
       completed: true,
+      query:query,
       results: [...response.data]
     }));
   } catch (e) {

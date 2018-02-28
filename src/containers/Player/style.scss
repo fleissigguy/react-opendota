@@ -134,7 +134,8 @@ $negative-color: rgb(236, 109, 109);
       z-index: -1;
       text-align: right;
       color: #e9eaba;
-      background: rgba(80, 80, 0, 0.3);
+      border-radius: 2px;
+      background: rgba(0, 0, 0, 0.14);
     }
 
     &.famous{

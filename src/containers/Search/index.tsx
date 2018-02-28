@@ -43,7 +43,7 @@ export class Search extends React.Component<Search.Props> {
     }
     if (!routeParams.query) {
       this.props.searchActions.clearPlayers();
-    } else if (!this.props.search.results.length) {
+    } else if (!this.props.search.results.length || this.props.search.query !== routeParams.query) {
       this.props.searchActions.searchPlayers(routeParams.query);
     }
   }
