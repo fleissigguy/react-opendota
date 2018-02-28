@@ -48,12 +48,6 @@ export class Search extends React.Component<Search.Props> {
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    // if(newProps.search.loading){
-    //   this.context.router.
-    // }
-  }
-
   @autobind()
   searchPlayers(e) {
     e.preventDefault();

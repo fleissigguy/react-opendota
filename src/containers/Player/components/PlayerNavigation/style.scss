@@ -1,0 +1,65 @@
+
+$tabs-count: 10;
+$image-size: 56px;
+$link-width: $image-size + 10px;
+
+.tab-list {
+  width: calc(#{$link-width} * #{$tabs-count} + (5px * 9));
+  margin: 0 auto;
+  position: relative;
+  padding: 0;
+  border-radius: 2px;
+  z-index: 2;
+  background: rgba(81, 105, 120, 0.14);
+
+  a {
+    display: inline-block;
+    /* border-radius: 8px; */
+    cursor: pointer;
+    outline: none;
+    filter: invert(85%);
+    transform: scale(.8);
+    width: $link-width;
+    text-align: center;
+    opacity: .4;
+    &:not(:nth-child(10)){
+      margin-right: 5px;
+    }
+    img {
+      width: $image-size;
+      height: $image-size;
+      vertical-align: middle;
+      padding: 10px;
+      pointer-events: none;
+    }
+    &.active{
+      transform: scale(1);
+      pointer-events: none;
+      opacity: 1;
+    }
+  }
+
+}
+.active-watcher {
+  position: absolute;
+  width: $link-width;
+  height: 2px;
+  bottom: 0;
+  background: #d9d9d9;
+  z-index: 1;
+  border-radius: 2px;
+  transition: all 279ms cubic-bezier(0, 0, 0.2, 1);
+}
+@for $i from 1 through $tabs-count {
+  a:nth-child(#{$i}).active ~.active-watcher{
+    left: ($i - 1) * ($link-width + 5px);
+  }
+}
+
+
+.tab-content{
+  z-index: 2;
+  left: 10%;
+  width: 80%;
+  position: relative;
+}

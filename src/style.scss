@@ -96,9 +96,9 @@ img{
     filter: contrast(93%) brightness(72%);
     box-shadow: inset 0 33px 100px 0 black;
   */
-  .root-scrolled & , .rescale-background & {
-    transform: scale(1.1);
-  }
+  //.root-scrolled & , .rescale-background & {
+  //  transform: scale(1.1);
+  //}
 }
 
 .lw {

@@ -17,7 +17,7 @@ export class Matches extends React.Component<Matches.Props, Matches.State> {
 
   render() {
     return (
-      <div className='tab-content overview'>
+      <div className='tab-content-overview'>
         ЗДАРОВА Я Matches)))0
       </div>
     );

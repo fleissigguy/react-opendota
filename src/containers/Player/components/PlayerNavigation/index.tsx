@@ -2,18 +2,19 @@ import * as React from "react";
 import {NavLink} from "react-router-dom";
 import {Route, Switch} from 'react-router';
 import {AsyncComponent} from "../../../../utils/AsyncComponentLoader";
+import './style.scss';
 
 const tabsContent = {
-  overview: () => import(/* webpackMode: "lazy", webpackChunkName: "player-overview" */ '../../../../components/PlayerTabsContent/views/Overview'),
-  heroes: () => import(/* webpackMode: "lazy", webpackChunkName: "player-heroes" */ '../../../../components/PlayerTabsContent/views/Heroes'),
-  histograms: () => import(/* webpackMode: "lazy", webpackChunkName: "player-histograms" */ '../../../../components/PlayerTabsContent/views/Histograms'),
-  matches: () => import(/* webpackMode: "lazy", webpackChunkName: "player-matches" */ '../../../../components/PlayerTabsContent/views/Matches'),
-  peers: () => import(/* webpackMode: "lazy", webpackChunkName: "player-peers" */ '../../../../components/PlayerTabsContent/views/Peers'),
-  rankings: () => import(/* webpackMode: "lazy", webpackChunkName: "player-rankings" */ '../../../../components/PlayerTabsContent/views/Rankings'),
-  records: () => import(/* webpackMode: "lazy", webpackChunkName: "player-records" */ '../../../../components/PlayerTabsContent/views/Records'),
-  totals: () => import(/* webpackMode: "lazy", webpackChunkName: "player-totals" */ '../../../../components/PlayerTabsContent/views/Totals'),
-  trends: () => import(/* webpackMode: "lazy", webpackChunkName: "player-trends" */ '../../../../components/PlayerTabsContent/views/Trends'),
-  wardmap: () => import(/* webpackMode: "lazy", webpackChunkName: "player-wardmap" */ '../../../../components/PlayerTabsContent/views/Wardmap')
+  overview: () => import(/* webpackMode: "lazy", webpackChunkName: "player-overview" */ '../../../../components/PlayerTabsContent/Overview'),
+  heroes: () => import(/* webpackMode: "lazy", webpackChunkName: "player-heroes" */ '../../../../components/PlayerTabsContent/Heroes'),
+  histograms: () => import(/* webpackMode: "lazy", webpackChunkName: "player-histograms" */ '../../../../components/PlayerTabsContent/Histograms'),
+  matches: () => import(/* webpackMode: "lazy", webpackChunkName: "player-matches" */ '../../../../components/PlayerTabsContent/Matches'),
+  peers: () => import(/* webpackMode: "lazy", webpackChunkName: "player-peers" */ '../../../../components/PlayerTabsContent/Peers'),
+  rankings: () => import(/* webpackMode: "lazy", webpackChunkName: "player-rankings" */ '../../../../components/PlayerTabsContent/Rankings'),
+  records: () => import(/* webpackMode: "lazy", webpackChunkName: "player-records" */ '../../../../components/PlayerTabsContent/Records'),
+  totals: () => import(/* webpackMode: "lazy", webpackChunkName: "player-totals" */ '../../../../components/PlayerTabsContent/Totals'),
+  trends: () => import(/* webpackMode: "lazy", webpackChunkName: "player-trends" */ '../../../../components/PlayerTabsContent/Trends'),
+  wardmap: () => import(/* webpackMode: "lazy", webpackChunkName: "player-wardmap" */ '../../../../components/PlayerTabsContent/Wardmap')
 };
 
 
@@ -28,8 +29,9 @@ export default class PlayerNavigation extends React.Component<PlayerNavigation.P
 
   static Link({playerId, routeName, imageFormat}) {
     return (
-      <NavLink to={`/player/${playerId}/${routeName}`} activeClassName='active'><img
-        src={`../../assets/icons/${routeName}.${imageFormat}`} alt=""/></NavLink>
+      <NavLink to={`/player/${playerId}/${routeName}`} activeClassName='active'>
+        <img src={require(`../../../../assets/icons/${routeName}.${imageFormat}`)} alt=""/>
+      </NavLink>
     )
   }
 
@@ -46,7 +48,7 @@ export default class PlayerNavigation extends React.Component<PlayerNavigation.P
 
 
     return (
-      <span>
+      <div>
         <div className='tab-list'>
           <PlayerNavigation.Link playerId={playerId} routeName='overview' imageFormat='png'/>
           <PlayerNavigation.Link playerId={playerId} routeName='matches' imageFormat='svg'/>
@@ -72,7 +74,7 @@ export default class PlayerNavigation extends React.Component<PlayerNavigation.P
             <PlayerNavigation.Route playerId={playerId} routeName='wardmap'/>
             <PlayerNavigation.Route playerId={playerId} routeName='rankings'/>
         </div>
-      </span>
+      </div>
     )
   }
 }

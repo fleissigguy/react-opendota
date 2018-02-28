@@ -2,7 +2,7 @@ import * as React from 'react';
 import './style.scss';
 import { connect } from 'react-redux';
 
-export namespace Wardmap {
+export namespace Totals {
   export interface Props {
   }
 
@@ -12,15 +12,15 @@ export namespace Wardmap {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class Wardmap extends React.Component<Wardmap.Props, Wardmap.State> {
+export class Totals extends React.Component<Totals.Props, Totals.State> {
 
   componentWillMount(){
   }
 
   render() {
     return (
-      <div className='tab-content overview'>
-        ЗДАРОВА Я Wardmap)))0
+      <div className='tab-content-overview'>
+        ЗДАРОВА Я Totals)))0
       </div>
     );
   }

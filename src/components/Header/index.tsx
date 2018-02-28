@@ -26,8 +26,9 @@ export class Header extends React.Component<Header.Props> {
       const parsedRoute = location.pathname.split('/');
       if (Header.PreviousRoute !== parsedRoute[1] && parsedRoute[1] !== 'player') {
         Header.PreviousRoute = localStorage['previous_route'] = parsedRoute[1];
+      }
+      if(parsedRoute[1] === "search"){
         Header.PreviousRouteQuery = localStorage['previous_search'] = location.search || "";
-        console.log('Header.PreviousRoute ',Header.PreviousRoute)
       }
     })
   }

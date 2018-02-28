@@ -2,7 +2,7 @@ import * as React from 'react';
 import './style.scss';
 import { connect } from 'react-redux';
 
-export namespace Rankings {
+export namespace Trends {
   export interface Props {
   }
 
@@ -12,15 +12,15 @@ export namespace Rankings {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class Rankings extends React.Component<Rankings.Props, Rankings.State> {
+export class Trends extends React.Component<Trends.Props, Trends.State> {
 
   componentWillMount(){
   }
 
   render() {
     return (
-      <div className='tab-content overview'>
-        ЗДАРОВА Я Rankings)))0
+      <div className='tab-content-overview'>
+        ЗДАРОВА Я Trends)))0
       </div>
     );
   }

@@ -17,7 +17,7 @@ export class Histograms extends React.Component<Histograms.Props, Histograms.Sta
 
   render() {
     return (
-      <div className='tab-content overview'>
+      <div className='tab-content-overview'>
         ЗДАРОВА Я Histograms)))0
       </div>
     );
