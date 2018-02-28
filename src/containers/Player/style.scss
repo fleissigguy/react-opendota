@@ -28,7 +28,7 @@ $negative-color: rgb(236, 109, 109);
     overflow-y: auto;
     height: inherit;
     background: $main-color;
-    padding-top: 23vh;
+    padding-top: 19vh;
     > div{
       z-index: 2;
       position: relative;
@@ -49,11 +49,11 @@ $negative-color: rgb(236, 109, 109);
 
   width: 64px;
   height: 64px;
-  background: $second-color;
+  background: #8d3c3c;
   border-radius: 50%;
   transition: all 125ms cubic-bezier(0.22, 0.61, 0.36, 1);
   position: absolute;
-  right: 128px;
+  right: 210px;
   top: 64px;
   z-index: 1;
   cursor: pointer;
@@ -66,7 +66,7 @@ $negative-color: rgb(236, 109, 109);
 }
 
 .button-bar {
-  background-color: $main-color;
+  background-color: $second-color;
   height: 2px;
   width: 24px;
   margin-bottom: 5px;
@@ -225,22 +225,29 @@ $negative-color: rgb(236, 109, 109);
   background-size: 12%;
 }
 
+$tabs-count: 10;
+$image-size: 56px;
+$link-width: $image-size + 10px;
+
 .tab-list {
-  $image-size: 56px;
-  $tab-list-padding: 6px;
-  width: calc(#{$image-size} * 10 + #{$tab-list-padding * 2} + (5px * 9));
+  width: calc(#{$link-width} * #{$tabs-count} + (5px * 9));
   margin: 0 auto;
   position: relative;
-  padding: $tab-list-padding;
-  background: #f5f5f514;
-  border-radius: 8px;
-
+  padding: 0;
+  border-radius: 2px;
+  background: rgba(81, 105, 120, 0.14);
 
   a {
     display: inline-block;
-    border-radius: 8px;
-    outline:none;
-    &:not(:last-child){
+    /* border-radius: 8px; */
+    cursor: pointer;
+    outline: none;
+    filter: invert(85%);
+    transform: scale(.8);
+    width: $link-width;
+    text-align: center;
+    opacity: .4;
+    &:not(:nth-child(10)){
       margin-right: 5px;
     }
     img {
@@ -248,10 +255,28 @@ $negative-color: rgb(236, 109, 109);
       height: $image-size;
       vertical-align: middle;
       padding: 10px;
+      pointer-events: none;
     }
     &.active{
-      background: $second-color;
+      transform: scale(1);
+      pointer-events: none;
+      opacity: 1;
     }
   }
 
+}
+.active-watcher {
+  position: absolute;
+  width: $link-width;
+  height: 2px;
+  bottom: 0;
+  background: #d9d9d9;
+  z-index: -1;
+  border-radius: 2px;
+  transition: all 279ms cubic-bezier(0, 0, 0.2, 1);
+}
+@for $i from 1 through $tabs-count {
+  a:nth-child(#{$i}).active ~.active-watcher{
+    left: ($i - 1) * ($link-width + 5px);
+  }
 }

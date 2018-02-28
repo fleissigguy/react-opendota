@@ -63,7 +63,7 @@ export class Search extends React.Component<Search.Props> {
 
   @autobind()
   setActivePlayer(player: ShortPlayerInfo){
-    this.context.router.history.push(`/player/${player.account_id}`);
+    this.context.router.history.push(`/player/${player.account_id}/overview`);
   }
 
   render() {

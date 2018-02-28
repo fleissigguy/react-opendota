@@ -126,10 +126,14 @@ img{
   font-size: 24px;
   background: rgba(0, 0, 0, 0.3);
   padding: 0;
+  pointer-events: none;
   color: rgba(205, 204, 210, 0.6);
   font-weight: 100;
   transition: opacity 350ms ease;
   .root-scrolled &{
+    opacity: 0;
+  }
+  .react-router-modal__modal-open &{
     opacity: 0;
   }
 }

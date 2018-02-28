@@ -20,7 +20,7 @@ declare interface Word {
 }
 
 
-export default class PlayerWordCloud extends React.Component<PlayerWordCloud.Props> {
+export default class PlayerWordCloud extends React.Component<PlayerWordCloud.Props, PlayerWordCloud.State> {
   state = {
     words: []
   };
@@ -42,14 +42,16 @@ export default class PlayerWordCloud extends React.Component<PlayerWordCloud.Pro
     }
   }
 
+  colorOptions= {
+    luminosity: 'light'
+  };
+
   render() {
-    if (!this.props.playerId || !this.state.words.length) {
-      return null;
-    }
     return (
       <TagCloud minSize={15}
                 maxSize={87}
-                colorOptions={{luminosity: 'light'}}
+                shuffle={false}
+                colorOptions={this.colorOptions}
                 className={`tag-cloud ${this.state.words.length && 'show'}`}
                 tags={this.state.words}
                 style={this.state.words.length < 30 ? {

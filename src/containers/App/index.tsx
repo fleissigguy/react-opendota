@@ -42,7 +42,7 @@ export class App extends React.Component<App.Props, App.State> {
   searchPlayers(e) {
     e.preventDefault();
     if(/(\d){1,9}/.test(this.searchInput.value)){
-      this.context.router.history.push('/player/'+this.searchInput.value);
+      this.context.router.history.push('/player/'+this.searchInput.value+'/overview');
     }else{
       this.context.router.history.push('/search?query='+this.searchInput.value);
     }
