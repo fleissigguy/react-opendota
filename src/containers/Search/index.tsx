@@ -48,9 +48,6 @@ export class Search extends React.Component<Search.Props> {
     }
   }
 
-  componentWillUnmount(){
-  }
-
   componentWillReceiveProps(newProps) {
     // if(newProps.search.loading){
     //   this.context.router.
@@ -66,7 +63,7 @@ export class Search extends React.Component<Search.Props> {
 
   @autobind()
   setActivePlayer(player: ShortPlayerInfo){
-    this.context.router.history.push(`/player/${player.account_id}`);
+    this.context.router.history.push(`/player/${player.account_id}/overview`);
   }
 
   render() {

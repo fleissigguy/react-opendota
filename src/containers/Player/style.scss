@@ -10,11 +10,10 @@ $negative-color: rgb(236, 109, 109);
   left: auto;
   top: 0;
   right: 0;
-  padding: 23vh 0;
+  padding: 0;
   animation: show-player-modal .279s forwards;
   color: $second-color;
   font-size: 27px;
-  background: rgba($main-color,0.94);
   &.hide {
     animation-direction: reverse;
   }
@@ -24,6 +23,17 @@ $negative-color: rgb(236, 109, 109);
   display: flex;
   justify-content: center;
   flex-direction: column;
+  height: 100%;
+  .player-info {
+    overflow-y: auto;
+    height: inherit;
+    background: $main-color;
+    padding-top: 19vh;
+    > div{
+      z-index: 2;
+      position: relative;
+    }
+  }
 }
 
 @keyframes show-player-modal {
@@ -39,11 +49,11 @@ $negative-color: rgb(236, 109, 109);
 
   width: 64px;
   height: 64px;
-  background: $second-color;
+  background: #8d3c3c;
   border-radius: 50%;
   transition: all 125ms cubic-bezier(0.22, 0.61, 0.36, 1);
   position: absolute;
-  right: 128px;
+  right: 210px;
   top: 64px;
   z-index: 1;
   cursor: pointer;
@@ -56,7 +66,7 @@ $negative-color: rgb(236, 109, 109);
 }
 
 .button-bar {
-  background-color: $main-color;
+  background-color: $second-color;
   height: 2px;
   width: 24px;
   margin-bottom: 5px;
@@ -65,12 +75,16 @@ $negative-color: rgb(236, 109, 109);
   border-radius: 2px;
   transition: all .225s cubic-bezier(.25, .8, .25, 1) 0s;
   &:first-child {
-    transform: translate(-5px, 7px) rotate(45deg);
+    transform: translate(-5px, 10px) rotate(0deg);
     width: 34px;
   }
   &:nth-child(2) {
-    transform: translate(-5px) rotate(-45deg);
-    width: 34px;
+    transform: translate(-7px,-3px) rotate(-45deg);
+    width: 17px;
+  }
+  &:last-child {
+    transform: translate(-7px,2px) rotate(45deg);
+    width: 17px;
   }
 }
 
@@ -103,13 +117,32 @@ $negative-color: rgb(236, 109, 109);
   }
 }
 .short-info{
+  position: relative;
   .player-name {
     font-size: 62px;
     color: $second-color;
     //background: rgb(76, 107, 125);
-    background: rgba($second-color,0.09);
+    background: rgba(darken($main-color,2%),0.45);
     padding: 0 8px;
     border-radius: 4px;
+    font-weight: 100;
+    &.persona {
+      position: absolute;
+      right: -12px;
+      bottom: -12px;
+      font-size: 20px;
+      z-index: -1;
+      text-align: right;
+      color: #e9eaba;
+      background: rgba(80, 80, 0, 0.3);
+    }
+
+    &.famous{
+      background: transparent;
+      color: #ffff73;
+      text-shadow: 0 0px 14px rgb(174, 174, 22);
+      font-weight: normal;
+    }
   }
 }
 
@@ -170,5 +203,80 @@ $negative-color: rgb(236, 109, 109);
     &.party:before {
       content: 'PARTY MMR';
     }
+  }
+}
+
+.player-not-found, .full-player-loading{
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 0;
+  padding-top: 23vh;
+  animation: show-player-modal .279s forwards;
+  color: $second-color;
+  font-size: 27px;
+  text-align: center;
+}
+.full-player-loading{
+  background: $main-color url(../../assets/loading.svg) no-repeat center;
+  background-size: 12%;
+}
+
+$tabs-count: 10;
+$image-size: 56px;
+$link-width: $image-size + 10px;
+
+.tab-list {
+  width: calc(#{$link-width} * #{$tabs-count} + (5px * 9));
+  margin: 0 auto;
+  position: relative;
+  padding: 0;
+  border-radius: 2px;
+  background: rgba(81, 105, 120, 0.14);
+
+  a {
+    display: inline-block;
+    /* border-radius: 8px; */
+    cursor: pointer;
+    outline: none;
+    filter: invert(85%);
+    transform: scale(.8);
+    width: $link-width;
+    text-align: center;
+    opacity: .4;
+    &:not(:nth-child(10)){
+      margin-right: 5px;
+    }
+    img {
+      width: $image-size;
+      height: $image-size;
+      vertical-align: middle;
+      padding: 10px;
+      pointer-events: none;
+    }
+    &.active{
+      transform: scale(1);
+      pointer-events: none;
+      opacity: 1;
+    }
+  }
+
+}
+.active-watcher {
+  position: absolute;
+  width: $link-width;
+  height: 2px;
+  bottom: 0;
+  background: #d9d9d9;
+  z-index: -1;
+  border-radius: 2px;
+  transition: all 279ms cubic-bezier(0, 0, 0.2, 1);
+}
+@for $i from 1 through $tabs-count {
+  a:nth-child(#{$i}).active ~.active-watcher{
+    left: ($i - 1) * ($link-width + 5px);
   }
 }
