@@ -19,11 +19,11 @@ export class Wardmap extends React.Component<Wardmap.Props, Wardmap.State> {
 
   render() {
     return (
-      <div className='tab-content-overview'>
-        ЗДАРОВА Я Wardmap)))0
+      <div className='tab-content-wardmap'>
+        <img src={require('../../../assets/dota2map.png')} alt="" className="wardmap"/>
       </div>
     );
-  }
+  }//
 }
 
 function mapStateToProps(state) {

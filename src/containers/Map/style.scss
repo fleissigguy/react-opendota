@@ -1,0 +1,30 @@
+.page.map{
+  padding: 0;
+  width: 100%;
+  left: 0;
+  top: 0;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.drawable-map{
+  width: 100%;
+  height: 100%;
+  body{
+    color: red !important;
+  }
+}
+.thanks{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #da3f06;
+  padding: 0 5px;
+  background: rgba(245, 245, 245, 0.86);
+  font-size: 19px;
+  a{
+    color: #30549a;
+  }
+}

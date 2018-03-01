@@ -1,11 +1,11 @@
-$main-color:rgb(218, 63, 6);
+$main-color: rgb(218, 63, 6);
 $second-color: rgb(245, 245, 245);
 $menu-button-color: rgb(31, 72, 90);
 
 .header {
   position: fixed;
   width: 100%;
-  z-index: 100;
+  z-index: 1;
   left: 0;
   top: 0;
   &.nav-showed {
@@ -20,6 +20,7 @@ $menu-button-color: rgb(31, 72, 90);
       height: 142px;
       background-color: $second-color;
       box-shadow: 0 3px 7px rgba(0, 0, 0, 0.32);
+      z-index: 2;
     }
   }
   &.root-page {
@@ -30,17 +31,15 @@ $menu-button-color: rgb(31, 72, 90);
   }
 }
 
-
 .title {
   margin: 7% 0 0 0;
   z-index: 1;
   position: absolute;
   pointer-events: none;
   transform: translateX(150px);
-  transition: transform 350ms ease-in-out, opacity .2s cubic-bezier(0, 0, 0.2, 1);
   font-size: 4.2vw;
   color: $main-color;
-  background: rgba($second-color,0.86);
+  background: rgba($second-color, 0.86);
   padding: 0 14px;
   .nav-showed & {
     pointer-events: all;
@@ -48,8 +47,9 @@ $menu-button-color: rgb(31, 72, 90);
     color: $second-color;
     background: transparent;
     padding: 0;
+    transition: transform 350ms ease-in-out, opacity .2s cubic-bezier(0, 0, 0.2, 1);
   }
-  .react-router-modal__modal-open &{
+  .react-router-modal__modal-open & {
     opacity: 0;
   }
   .header:not(.nav-showed) & {
@@ -60,8 +60,12 @@ $menu-button-color: rgb(31, 72, 90);
       font-size: 64px;
     }
   }
+  .header:not(.nav-showed) & {
+    .map-showed & {
+      display: none;
+    }
+  }
 }
-
 
 .routes {
   font-weight: bold;
@@ -93,6 +97,13 @@ $menu-button-color: rgb(31, 72, 90);
       margin-top: 36px;
     }
   }
+  .header:not(.nav-showed) & {
+    .map-showed & {
+      left: 0 !important;
+      margin-top: 43px !important;
+    }
+  }
+
 }
 
 .router-link {
@@ -114,13 +125,12 @@ $menu-button-color: rgb(31, 72, 90);
       color: $second-color;
       background: transparent;
     }
-    #root:not(.root-scrolled) &{
-      &--active{
+    #root:not(.root-scrolled) & {
+      &--active {
         text-shadow: 0 1px 20px rgba(0, 0, 0, 0.61);
       }
     }
   }
-
 
   .header:not(.nav-showed) & {
     .root-scrolled & {
@@ -131,7 +141,15 @@ $menu-button-color: rgb(31, 72, 90);
       }
     }
   }
-
+  .header:not(.nav-showed) & {
+    .map-showed & {
+      margin-top: 0;
+      font-size: 3.2vw;
+      text-shadow: none !important;
+      color: $main-color;
+      background: rgba($second-color, 0.86);
+    }
+  }
 }
 
 

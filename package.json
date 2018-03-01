@@ -56,6 +56,7 @@
     "classnames": "^2.2.5",
     "core-decorators": "^0.20.0",
     "font-awesome": "^4.7.0",
+    "heatmap.js": "^2.0.5",
     "moment": "^2.20.1",
     "path-to-regexp": "^2.1.0",
     "query-string": "^5.1.0",

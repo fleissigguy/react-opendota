@@ -126,10 +126,12 @@ $negative-color: rgb(236, 109, 109);
     padding: 0 8px;
     border-radius: 4px;
     font-weight: 100;
+    max-width: 500px;
+    display: block;
     &.persona {
       position: absolute;
       right: -12px;
-      bottom: -12px;
+      bottom: -5px;
       font-size: 20px;
       z-index: -1;
       text-align: right;
@@ -153,13 +155,13 @@ $negative-color: rgb(236, 109, 109);
   label{
     &:before{
       display: block;
-      font-size: 24px;
+      font-size: 15px;
     }
   }
   .percent{
     background: hsl(36,30%,46%);
     &:before{
-      content: 'WINRATE';
+      content: 'ДОЛЯ ПОБЕД';
     }
   }
   .wins,.loses,.percent{
@@ -170,7 +172,7 @@ $negative-color: rgb(236, 109, 109);
     color: $positive-color;
     background: rgb(31, 84, 14);
     &:before{
-      content: 'WINS';
+      content: 'ПОБЕДЫ';
       color: rgba($positive-color,0.74);
     }
   }
@@ -178,7 +180,7 @@ $negative-color: rgb(236, 109, 109);
     color: $negative-color;
     background: rgb(97, 49, 49);
     &:before{
-      content: 'LOSES';
+      content: 'ПОРАЖЕНИЯ';
       color: rgba($negative-color,0.74);
     }
   }
@@ -192,17 +194,19 @@ $negative-color: rgb(236, 109, 109);
     color: rgba($second-color, 0.87);
     &:before {
       display: block;
-      font-size: 20px;
+      font-size: 16px;
+      //max-width: 150px;
+      max-width: 115px;
       color:rgba($second-color, 0.65)
     }
     &.estimated:before {
-      content: 'ESTIMATED MMR';
+      content: 'ПРЕДП. ММР';
     }
     &.solo:before {
-      content: 'SOLO MMR';
+      content: 'ОДИН. ММР';
     }
     &.party:before {
-      content: 'PARTY MMR';
+      content: 'ГРУП. ММР';
     }
   }
 }
