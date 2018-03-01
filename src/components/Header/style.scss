@@ -37,7 +37,6 @@ $menu-button-color: rgb(31, 72, 90);
   position: absolute;
   pointer-events: none;
   transform: translateX(150px);
-  transition: transform 350ms ease-in-out, opacity .2s cubic-bezier(0, 0, 0.2, 1);
   font-size: 4.2vw;
   color: $main-color;
   background: rgba($second-color,0.86);
@@ -48,6 +47,7 @@ $menu-button-color: rgb(31, 72, 90);
     color: $second-color;
     background: transparent;
     padding: 0;
+    transition: transform 350ms ease-in-out, opacity .2s cubic-bezier(0, 0, 0.2, 1);
   }
   .react-router-modal__modal-open &{
     opacity: 0;
