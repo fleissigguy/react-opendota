@@ -64,13 +64,6 @@ export default class PlayerWordCloud extends React.Component<PlayerWordCloud.Pro
                 colorOptions={this.colorOptions}
                 className={`tag-cloud ${this.state.words.length && 'show'}`}
                 tags={this.state.words}
-                style={this.state.words.length < 30 ? {
-                  left: '32.5%',
-                  width: '35%'
-                } : this.state.words.length < 470 && {
-                  left: '20%',
-                  width: '60%'
-                } || null}
       />
     )
   }

@@ -4,12 +4,13 @@ $image-size: 56px;
 $link-width: $image-size + 10px;
 
 .tab-list {
-  width: calc(#{$link-width} * #{$tabs-count} + (5px * 9));
+  width: 66px;
   margin: 0 auto;
-  position: relative;
   padding: 0;
   border-radius: 2px;
+  position: absolute;
   z-index: 2;
+  left: 54px;
   background: rgba(81, 105, 120, 0.14);
 
   a {
@@ -18,8 +19,8 @@ $link-width: $image-size + 10px;
     cursor: pointer;
     outline: none;
     filter: invert(85%);
-    transform: scale(.8);
-    width: $link-width;
+    transform: scale(0.8);
+    width: 66px;
     text-align: center;
     opacity: .4;
     &:not(:nth-child(10)){
@@ -42,8 +43,10 @@ $link-width: $image-size + 10px;
 }
 .active-watcher {
   position: absolute;
-  width: $link-width;
-  height: 2px;
+  width: 2px;
+  height: 56px;
+  /* transform: rotate(90deg); */
+  right: 0;
   bottom: 0;
   background: #d9d9d9;
   z-index: 1;
@@ -52,17 +55,16 @@ $link-width: $image-size + 10px;
 }
 @for $i from 1 through $tabs-count {
   a:nth-child(#{$i}).active ~.active-watcher{
-    left: ($i - 1) * ($link-width + 5px);
+    top: ($i - 1) * ($image-size);
   }
 }
 
 
 .tab-content{
   z-index: 2;
-  left: 10%;
-  width: 80%;
+  left: 128px;
+  width: calc(100% - 256px);
   position: relative;
-
   margin-top: 15px;
   text-align: center;
 }

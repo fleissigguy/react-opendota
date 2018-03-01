@@ -28,7 +28,7 @@ $negative-color: rgb(236, 109, 109);
     overflow-y: auto;
     height: inherit;
     background: $main-color;
-    padding-top: 19vh;
+    padding-top: 64px;
     > div{
       z-index: 2;
       position: relative;
@@ -55,7 +55,7 @@ $negative-color: rgb(236, 109, 109);
   position: absolute;
   right: 210px;
   top: 64px;
-  z-index: 1;
+  z-index: 5;
   cursor: pointer;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.17);
 
@@ -91,14 +91,13 @@ $negative-color: rgb(236, 109, 109);
 .main-player-info {
   display: flex;
   flex-direction: row;
-  padding-bottom: 15px;
+  padding: 0 128px 15px;
 }
 
 .left-side-info {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-left: auto;
   .player-avatar {
     border-radius: 8px;
     width: 256px;
@@ -108,7 +107,6 @@ $negative-color: rgb(236, 109, 109);
 
 .right-side-info {
   margin-left: 15px;
-  margin-right: auto;
   > div:not(:first-child) {
     margin-top: 15px;
     > label:not(:first-child){

@@ -20,7 +20,8 @@ export class Wardmap extends React.Component<Wardmap.Props, Wardmap.State> {
   render() {
     return (
       <div className='tab-content-wardmap'>
-        <img src={require('../../../assets/dota2map.png')} alt="" className="wardmap"/>
+        <img src={require('../../../assets/dota2map.png')} alt="" className="wardmap sentry"/>
+        <img src={require('../../../assets/dota2map.png')} alt="" className="wardmap observer"/>
       </div>
     );
   }//
