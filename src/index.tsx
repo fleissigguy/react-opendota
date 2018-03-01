@@ -17,10 +17,10 @@ const store = configureStore();
 export const history = createBrowserHistory();
 
 const app = () => import(/* webpackMode: "lazy", webpackChunkName: "root" */ './containers/App');
-const playground = () => import(/* webpackMode: "lazy", webpackChunkName: "playground" */ './containers/Playground');
 const settings = () => import(/* webpackMode: "lazy", webpackChunkName: "settings" */ './containers/Settings');
 const search = () => import(/* webpackMode: "lazy", webpackChunkName: "search" */ './containers/Search');
 const player = () => import(/* webpackMode: "lazy", webpackChunkName: "player" */ './containers/Player');
+const map = () => import(/* webpackMode: "lazy", webpackChunkName: "map" */ './containers/Map');
 
 
 
@@ -45,11 +45,11 @@ ReactDOM.render(
           <Route path="/settings" component={() => <AsyncComponent
             moduleProvider={settings}/>}>
           </Route>
-          <Route path="/game" component={() => <AsyncComponent
-            moduleProvider={playground}/>}>
-          </Route>
           <Route path="/search" component={() => <AsyncComponent
             moduleProvider={search}/>}>
+          </Route>
+          <Route path="/map" component={() => <AsyncComponent
+            moduleProvider={map}/>}>
           </Route>
           <ModalRoute className='player-modal' path="/player/:playerId" component={() => (<AsyncComponent moduleProvider={player}/>)}>
           </ModalRoute>

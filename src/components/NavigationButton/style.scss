@@ -26,6 +26,9 @@ $menu-button-color: rgb(31, 72, 90);
     transform: scale(1.1);
   }
 
+  .map-showed &{
+    top:32px;
+  }
 }
 
 
@@ -64,6 +67,7 @@ $menu-button-color: rgb(31, 72, 90);
       width: 34px;
     }
   }
+
 }
 
 .menu-button-after {
@@ -88,5 +92,8 @@ $menu-button-color: rgb(31, 72, 90);
 
   .root-scrolled & {
     top: 40px;
+  }
+  .map-showed &{
+    top:32px;
   }
 }

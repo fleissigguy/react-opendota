@@ -6,7 +6,7 @@ export default abstract class RootEventListener {
 
   static OnScroll(e){
     const {classList, scrollTop} = e.target as any;
-    let isScrolledDown = scrollTop > (window.document.body.clientHeight / 10);
+    let isScrolledDown = scrollTop > (window.document.body.clientHeight / 5);
     if (RootEventListener.RootIsScrolledDown != isScrolledDown) {
       RootEventListener.RootIsScrolledDown = isScrolledDown;
       classList[isScrolledDown && 'add' || 'remove']('root-scrolled');
