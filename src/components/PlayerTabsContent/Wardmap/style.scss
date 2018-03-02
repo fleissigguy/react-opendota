@@ -3,9 +3,38 @@
   justify-content: space-around;
 }
 .wardmap {
-  height: 56.5vh;
-  width: auto;
+  width: 29.7vw;
+  height: 58vh;
   border: 2px solid whitesmoke;
   border-radius: 2px;
-  max-height: 35vw;
+  position: relative;
+  max-height: 29.7vw;
+  > img {
+    height: inherit;
+    width: inherit;
+    max-height: inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-right: 4px;
+    padding-bottom: 4px;
+  }
+  &:after{
+    content:'';
+    width: 56px;
+    height: 128px;
+    position: absolute;
+    right: -18px;
+    transform: rotate(25deg);
+    top: -36px;
+    background-size: cover;
+    background-position: center;
+    z-index: 2;
+  }
+  &.observer:after{
+    background-image: url(../../../assets/observer-ward.png);
+  }
+  &.sentry:after{
+    background-image: url(../../../assets/sentry-ward.png);
+  }
 }

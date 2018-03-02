@@ -39,7 +39,7 @@ export default class PlayerNavigation extends React.Component<PlayerNavigation.P
     return (
       <Route path={`/player/${playerId}/${routeName}`}
              exact={true}
-             component={() => (<AsyncComponent moduleProvider={tabsContent[routeName]}/>)}/>
+             component={() => (<AsyncComponent moduleProvider={tabsContent[routeName]} props={{playerId}}/>)}/>
     )
   }
 
