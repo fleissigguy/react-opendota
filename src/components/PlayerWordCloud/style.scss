@@ -3,9 +3,10 @@
   position: fixed;
   z-index: 1;
   filter: blur(3px);
-  left: 10%;
-  width: 80%;
-  top: 15%;
+  left: 0;
+  width: 100%;
+  min-height: 10%;
+  top: 0;
   text-align: center;
   opacity: 0;
   transition: opacity 375ms linear;

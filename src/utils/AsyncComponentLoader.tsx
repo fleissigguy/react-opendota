@@ -3,6 +3,7 @@ import Loading from '../components/Loading/index';
 
 declare interface AsyncComponentProps {
   moduleProvider: Function;
+  props?:object
 }
 
 declare interface AsyncComponentState {
@@ -12,7 +13,7 @@ declare interface AsyncComponentState {
 
 export class AsyncComponent extends React.Component<AsyncComponentProps, AsyncComponentState> {
   private isLoaded: boolean = false;
-  private isMount: boolean = false;
+  private isMount: boolean = true;
 
   constructor(props: any) {
     super(props);
@@ -31,16 +32,12 @@ export class AsyncComponent extends React.Component<AsyncComponentProps, AsyncCo
       });
     }
   }
-  componentDidMount(){
-    this.isMount = true;
-  }
-
   componentWillUnmount(){
     this.isMount = false;
   }
 
   render() {
     const {LoadedAsyncComponent} = this.state;
-    return LoadedAsyncComponent ? <LoadedAsyncComponent/> : <Loading text='Page loading'/>;
+    return LoadedAsyncComponent ? <LoadedAsyncComponent {...this.props.props || {}}/> : <Loading text='Page loading'/>;
   }
 }
