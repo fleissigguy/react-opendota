@@ -24,7 +24,7 @@ export class Map extends React.Component {
   render() {
     return (
       <div className="page map">
-        <iframe src="https://devilesk.com/dota2/apps/drawablemap" className='drawable-map'/>
+        <iframe src="https://devilesk.com/dota2/apps/interactivemap" className='drawable-map'/>
         <span className="thanks">
           Карта создана <a href="https://github.com/devilesk" className="github-user">devilesk</a> и является его разработкой
         </span>
