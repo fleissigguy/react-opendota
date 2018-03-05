@@ -145,6 +145,7 @@ $menu-button-color: rgb(31, 72, 90);
     .map-showed & {
       margin-top: 0;
       font-size: 3.2vw;
+      transform: translateX(250px);
       text-shadow: none !important;
       color: $main-color;
       background: rgba($second-color, 0.86);
