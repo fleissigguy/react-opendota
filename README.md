@@ -1,5 +1,7 @@
 # MOBA GAME on React, Redux & TypeScript
 
+[Open Dota Webclient test site](https://js2me.github.io/opendota-webclient)
+
 Simple example and boilerplate on wonderful stack!
 
 ## Contains
