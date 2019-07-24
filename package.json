@@ -52,7 +52,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "classnames": "^2.2.5",
     "core-decorators": "^0.20.0",
     "font-awesome": "^4.7.0",
